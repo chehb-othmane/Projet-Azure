@@ -968,6 +968,4 @@ Pour reproduire cette capture d'écran :
 5. **Sécurité** :
    - Configurer HTTPS et les certificats SSL pour sécuriser le trafic
    - Utiliser les restrictions d'accès IP si nécessaire
-   - Activer l'authentification et l'autorisation appropriées
-
-[Cette section sera complétée ultérieurement]
+   - Activer l'authentification et l'autorisation appropriée
