@@ -160,7 +160,143 @@ Pour vérifier que toutes les ressources ont été supprimées, vérifiez votre 
 
 ## Mise en place de la haute disponibilité et l'auto-scaling dans Azure (a1.png à a5.png)
 
-[Cette section sera complétée ultérieurement]
+## Mise en place de la haute disponibilité et l'auto-scaling dans Azure (a1.png à a5.png)
+
+Cette section couvre la création d'un groupe à haute disponibilité et d'un ensemble de mise à l'échelle de machines virtuelles (VMSS) dans Azure.
+
+### a1.png - Création d'un groupe à haute disponibilité dans le portail Azure
+
+Pour reproduire cette capture d'écran :
+1. Connectez-vous au [portail Azure](https://portal.azure.com)
+2. Recherchez "Groupes à haute disponibilité" dans la barre de recherche en haut
+3. Cliquez sur "Créer" pour lancer l'assistant de création
+4. Configurez les paramètres suivants :
+   - Abonnement : Sélectionnez votre abonnement Azure
+   - Groupe de ressources : Créez un nouveau groupe appelé "TP-HA-RG"
+   - Nom : "TP-AvailabilitySet"
+   - Région : France Central
+   - Domaines d'erreur : 2 (valeur par défaut)
+   - Domaines de mise à jour : 5 (valeur par défaut)
+5. Cliquez sur "Vérifier + créer" puis sur "Créer"
+
+### a2.png - Création d'une VM Windows dans le groupe à haute disponibilité
+
+Pour reproduire cette capture d'écran :
+1. Dans le portail Azure, accédez à "Machines virtuelles"
+2. Cliquez sur "Créer" puis sélectionnez "Machine virtuelle"
+3. Configurez les paramètres de base :
+   - Abonnement : Votre abonnement Azure
+   - Groupe de ressources : "TP-HA-RG" (le même que pour le groupe à haute disponibilité)
+   - Nom de la machine virtuelle : "win-vm-1"
+   - Région : France Central
+   - Options de disponibilité : Sélectionnez "Groupe à haute disponibilité"
+   - Groupe à haute disponibilité : "TP-AvailabilitySet" (celui que vous venez de créer)
+   - Image : Windows Server 2016 Datacenter (ou l'image personnalisée si vous en avez créé une)
+   - Taille : Standard D2s v3
+4. Configurez les informations d'identification et les ports d'entrée
+5. Continuez avec les paramètres par défaut pour les autres sections
+6. Cliquez sur "Vérifier + créer" puis sur "Créer"
+
+### a3.png - Liste des machines virtuelles créées dans le groupe à haute disponibilité
+
+Pour reproduire cette capture d'écran :
+1. Créez trois machines virtuelles dans le groupe à haute disponibilité comme indiqué ci-dessus :
+   - Une première VM Windows nommée "win-vm-1" (déjà créée à l'étape précédente)
+   - Une VM Linux nommée "linux-vm-1" avec Ubuntu Server 20.04 LTS et taille Standard B2s
+   - Une deuxième VM Windows nommée "win-vm-2" avec la même image que la première VM Windows
+2. Une fois toutes les VM créées, accédez à "Machines virtuelles" dans le portail Azure
+3. Vous devriez voir la liste de toutes vos VM avec leurs états respectifs
+
+### a4.png - Domaines d'erreur et de mise à jour pour une VM dans le groupe à haute disponibilité
+
+Pour reproduire cette capture d'écran :
+1. Dans le portail Azure, accédez à la machine virtuelle "win-vm-1"
+2. Dans le menu de gauche, sélectionnez "Disponibilité + mise à l'échelle"
+3. Vous verrez alors les informations sur les domaines d'erreur et de mise à jour attribués à cette VM
+4. Notez les valeurs pour le domaine d'erreur (0) et le domaine de mise à jour (0)
+5. Répétez cette opération pour les autres VM pour observer leur distribution dans les différents domaines
+
+### a5.png - Suppression du groupe de ressources et des ressources associées
+
+Pour reproduire cette capture d'écran :
+1. Dans le portail Azure, accédez à "Groupes de ressources"
+2. Sélectionnez le groupe de ressources "TP-HA-RG"
+3. Cliquez sur "Supprimer le groupe de ressources" dans le menu supérieur
+4. Dans la boîte de dialogue qui s'affiche, saisissez le nom du groupe de ressources "TP-HA-RG" pour confirmer la suppression
+5. Cliquez sur "Supprimer"
+
+### Création d'un ensemble de mise à l'échelle de machines virtuelles (VMSS)
+
+Pour créer un VMSS comme dans l'exercice 3 du rapport :
+1. Dans le portail Azure, recherchez "Ensembles de mise à l'échelle de machines virtuelles"
+2. Cliquez sur "Créer" pour lancer l'assistant de création
+3. Configurez les paramètres de base :
+   - Abonnement : Votre abonnement Azure
+   - Groupe de ressources : Créez un nouveau groupe appelé "TP-VMSS-RG"
+   - Nom du groupe identique de machines virtuelles : "tp-vmss"
+   - Région : France Central
+   - Zone de disponibilité : Sélectionnez "Zone 1"
+   - Image : Ubuntu Server 20.04 LTS
+   - Taille : Standard DS1_v2
+   - Type d'authentification : Mot de passe
+   - Configurez un nom d'utilisateur et un mot de passe sécurisés
+4. Dans la section "Mise à l'échelle", configurez :
+   - Nombre d'instances initial : 3
+   - Stratégie de mise à l'échelle : Flexible
+   - Nombre minimal d'instances : 2
+   - Nombre maximal d'instances : 5
+   - Nombre souhaité d'instances : 3
+5. Cliquez sur "Vérifier + créer" puis sur "Créer"
+
+### Configuration de l'auto-scaling pour le VMSS
+
+Pour configurer l'auto-scaling une fois le VMSS créé :
+1. Accédez à votre VMSS dans le portail Azure
+2. Dans le menu de gauche, sélectionnez "Mise à l'échelle"
+3. Sélectionnez "Mise à l'échelle automatique personnalisée"
+4. Créez deux règles de mise à l'échelle :
+
+   **Règle d'augmentation de capacité :**
+   - Nom : "Scale-Out-Rule"
+   - Métrique : Pourcentage CPU moyen
+   - Opérateur : Supérieur à
+   - Seuil : 70%
+   - Durée : 10 minutes (période d'agrégation)
+   - Action : Augmenter le nombre d'instances de 1
+   - Délai d'attente : 5 minutes
+   
+   **Règle de diminution de capacité :**
+   - Nom : "Scale-In-Rule"
+   - Métrique : Pourcentage CPU moyen
+   - Opérateur : Inférieur à
+   - Seuil : 30%
+   - Durée : 10 minutes (période d'agrégation)
+   - Action : Diminuer le nombre d'instances de 1
+   - Délai d'attente : 5 minutes
+
+5. Enregistrez les règles d'auto-scaling
+
+### Test de l'auto-scaling
+
+Pour tester l'auto-scaling de votre VMSS :
+1. Accédez à la section "Instances" de votre VMSS pour vérifier que les 3 instances initiales sont bien créées
+2. Connectez-vous à l'une des instances via SSH
+3. Exécutez le script suivant pour générer une charge CPU élevée :
+   ```bash
+   while true; do openssl speed; done
+   ```
+4. Répétez cette opération sur les trois instances
+5. Observez dans le portail Azure que le VMSS détecte l'augmentation de la charge CPU
+6. Après environ 10 minutes, vérifiez que le VMSS a ajouté une instance supplémentaire (passage de 3 à 4 instances)
+
+### Suppression des ressources VMSS
+
+Une fois vos tests terminés :
+1. Accédez à "Groupes de ressources" dans le portail Azure
+2. Sélectionnez le groupe de ressources "TP-VMSS-RG"
+3. Cliquez sur "Supprimer le groupe de ressources"
+4. Confirmez la suppression en saisissant le nom du groupe de ressources
+5. Cliquez sur "Supprimer"
 
 ## Réseaux Virtuels Azure (b1.png à b16.png)
 
