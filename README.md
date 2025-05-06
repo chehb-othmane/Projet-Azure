@@ -600,8 +600,374 @@ Après avoir terminé tous les exercices, nettoyez les ressources pour éviter d
 
 ## Création et gestion du stockage Azure (c1.png à c7.png)
 
-[Cette section sera complétée ultérieurement]
+Cette section couvre la création et la configuration des différents types de stockage Azure (Blob, File, Queue et Table) ainsi que l'exploration de leurs fonctionnalités spécifiques.
+
+### c1.png - Création d'un compte de stockage
+
+Pour reproduire cette capture d'écran :
+1. Connectez-vous au [portail Azure](https://portal.azure.com)
+2. Cliquez sur "Créer une ressource" dans le menu de gauche
+3. Recherchez "Compte de stockage" et sélectionnez-le
+4. Cliquez sur "Créer"
+5. Configurez les paramètres suivants :
+   - Abonnement : Sélectionnez votre abonnement Azure
+   - Groupe de ressources : Créez un nouveau groupe appelé "storage-RG"
+   - Nom du compte de stockage : Choisissez un nom unique (doit être en minuscules, sans espaces)
+   - Région : West Europe
+   - Performances : Standard
+   - Redondance : Stockage localement redondant (LRS)
+   - Décochez l'option "Data Lake Storage Gen2"
+   - Niveau d'accès au stockage blob par défaut : Chaud (Hot)
+6. Cliquez sur "Vérifier + créer" puis sur "Créer"
+
+> **Note**: Si vous essayez d'utiliser un nom simple comme "TEST", vous recevrez une erreur car le nom du compte de stockage doit être unique au niveau mondial dans Azure.
+
+### c2.png - Configuration du container Blob et upload des fichiers
+
+Pour reproduire cette capture d'écran :
+1. Une fois le compte de stockage créé, accédez-y dans le portail Azure
+2. Dans le menu de gauche, sélectionnez "Containers" (sous la section "Stockage de données")
+3. Cliquez sur "+ Container" et configurez :
+   - Nom : "cours"
+   - Niveau d'accès : Privé
+4. Une fois le container créé, cliquez dessus
+5. Cliquez sur "Télécharger" pour ajouter des fichiers PDF
+6. Téléchargez 3 fichiers PDF (les 3 premiers chapitres Azure)
+7. Une fois téléchargés, vous pouvez voir la liste des fichiers dans le container
+
+### c3.png - Container avec niveau d'accès Container et modification de fichier texte
+
+Pour reproduire cette capture d'écran :
+1. Dans votre compte de stockage, accédez à "Containers"
+2. Cliquez sur "+ Container" et configurez :
+   - Nom : "text-files"
+   - Niveau d'accès : Container (lecture anonyme pour les conteneurs et les blobs)
+3. Une fois le container créé, cliquez dessus
+4. Cliquez sur "Télécharger" pour ajouter un fichier texte (par exemple "notes.txt")
+5. Une fois le fichier téléchargé, cliquez dessus
+6. Cliquez sur "Modifier" dans le menu supérieur
+7. Modifiez le contenu du fichier texte
+8. Cliquez sur "Enregistrer" pour sauvegarder les modifications
+
+> **Note**: Avec le niveau d'accès "Container", vous pouvez accéder directement au fichier via son URL publique: `https://[nom-de-votre-compte].blob.core.windows.net/text-files/notes.txt`
+
+### c4.png - Création et connexion du File Share
+
+Pour reproduire cette capture d'écran :
+1. Dans votre compte de stockage, accédez à "Partages de fichiers" dans le menu de gauche
+2. Cliquez sur "+ Partage de fichiers" et configurez :
+   - Nom : "fileshare1"
+   - Quota : 5 GiB (modifié depuis la valeur par défaut de 5120 GiB)
+   - Niveau : Chaud
+3. Une fois le partage créé, cliquez dessus
+4. Cliquez sur "Connecter" dans le menu supérieur
+5. Dans le panneau "Connecter", sélectionnez votre système d'exploitation
+6. Copiez le script de connexion fourni pour monter le partage de fichiers sur votre machine locale
+7. Exécutez ce script dans une invite de commande ou terminal sur votre machine locale
+8. Accédez au lecteur nouvellement monté sur votre système
+9. Copiez les 3 premiers chapitres Azure dans ce lecteur
+10. Retournez au portail Azure et cliquez sur "Actualiser" pour voir les fichiers ajoutés
+
+### c5.png - Création et gestion de Table Storage
+
+Pour reproduire cette capture d'écran :
+1. Dans votre compte de stockage, accédez à "Tables" dans le menu de gauche
+2. Cliquez sur "+ Table" et nommez-la "table1"
+3. Une fois la table créée, accédez à "Explorateur de stockage" dans le menu de gauche
+4. Développez "TABLES" puis cliquez sur "table1"
+5. Cliquez sur "Ajouter une entité" et ajoutez les entités suivantes :
+   - Entité 1:
+     - PartitionKey: "Ahmed"
+     - RowKey: "Ahmedi"
+   - Entité 2:
+     - PartitionKey: "Amine"
+     - RowKey: "Amini"
+     - Propriété supplémentaire: age (Int32) = 24
+   - Entité 3:
+     - PartitionKey: "Saida"
+     - RowKey: "Saidi"
+     - Propriété supplémentaire: age (Int32) = 22
+6. Pour effectuer une requête, cliquez sur "Requête"
+7. Dans le champ "Filtre", entrez: `age eq 24 or PartitionKey eq 'Ahmed'`
+8. Cliquez sur "Exécuter la requête" pour voir les résultats filtrés
+
+### c6.png - Création et ajout de messages dans Queue Storage
+
+Pour reproduire cette capture d'écran :
+1. Dans votre compte de stockage, accédez à "Files d'attente" dans le menu de gauche
+2. Cliquez sur "+ File d'attente" et nommez-la "Queue1"
+3. Une fois la file d'attente créée, cliquez dessus
+4. Cliquez sur "+ Ajouter un message"
+5. Entrez le texte de votre premier message et cliquez sur "OK"
+6. Répétez l'opération pour ajouter un deuxième message
+7. Vous verrez maintenant les deux messages dans votre file d'attente
+
+### c7.png - Vue d'ensemble du compte de stockage avec Storage Explorer
+
+Pour reproduire cette capture d'écran :
+1. Dans votre compte de stockage, accédez à "Explorateur de stockage" dans le menu de gauche
+2. Vous verrez une vue d'ensemble de tous les types de stockage que vous avez configurés :
+   - BLOB CONTAINERS : "cours" et "text-files"
+   - FILE SHARES : "fileshare1"
+   - QUEUES : "Queue1"
+   - TABLES : "table1"
+3. Explorez chaque type de stockage pour vérifier que toutes vos données sont présentes
+
+### Exploration du stockage haute disponibilité
+
+Pour explorer les options de haute disponibilité du stockage :
+1. Notez que pour créer un blob storage hautement disponible, vous devriez choisir ZRS (Zone-Redundant Storage) ou GZRS (Geo-Zone-Redundant Storage) comme type de redondance
+2. Sachez que le type de redondance est défini lors de la création du compte de stockage et ne peut pas être modifié facilement par la suite pour certaines transitions
+3. Pour modifier le type de redondance, vous devriez créer un nouveau compte de stockage avec le type de redondance souhaité
+
+### Libération des ressources
+
+Pour supprimer toutes les ressources de stockage créées :
+1. Dans le portail Azure, accédez à "Groupes de ressources"
+2. Sélectionnez le groupe de ressources "storage-RG"
+3. Cliquez sur "Supprimer le groupe de ressources" dans le menu supérieur
+4. Confirmez la suppression en saisissant le nom du groupe de ressources
+5. Cliquez sur "Supprimer"
 
 ## Azure App Service (d1 à d11)
+
+Cette section détaille les étapes pour reproduire les captures d'écran liées à Azure App Service (d1.png à d11.png).
+
+### d1.png - Création de la première application web avec le plan B1
+
+Pour reproduire cette capture d'écran :
+1. Connectez-vous au [portail Azure](https://portal.azure.com)
+2. Cliquez sur "Créer une ressource" dans le menu de gauche
+3. Recherchez "Web App" et sélectionnez-la
+4. Cliquez sur "Créer"
+5. Dans l'onglet "Informations de base", configurez :
+   - Groupe de ressources : créez "webApp-RG" (ou sélectionnez-le s'il existe déjà)
+   - Nom : "BoualiKarim" (ou choisissez un nom unique)
+   - Publier : "Code"
+   - Pile d'exécution : "Java 8"
+   - Java web server stack : "Apache Tomcat 9.0"
+   - Région : "East US"
+   - Système d'exploitation : "Linux"
+6. Dans la section "Plan tarifaire", cliquez sur "Créer nouveau"
+   - Nommez-le "plan-B1"
+   - Sélectionnez le niveau tarifaire "B1"
+7. Cliquez sur "Vérifier + créer"
+8. Une fois la validation passée, cliquez sur "Créer"
+
+### d2.png - Création de la deuxième application web avec le même plan B1
+
+Pour reproduire cette capture d'écran :
+1. Dans le portail Azure, cliquez sur "Créer une ressource"
+2. Recherchez "Web App" et sélectionnez-la
+3. Cliquez sur "Créer"
+4. Dans l'onglet "Informations de base", configurez :
+   - Groupe de ressources : "webApp-RG" (le même que précédemment)
+   - Nom : "BoualiKarim1" (ou autre nom unique)
+   - Publier : "Code"
+   - Pile d'exécution : "Java 8"
+   - Java web server stack : "Apache Tomcat 9.0"
+   - Région : "East US"
+   - Système d'exploitation : "Linux"
+5. Dans la section "Plan tarifaire", sélectionnez "Utiliser l'existant"
+   - Choisissez "plan-B1" dans la liste déroulante
+6. Cliquez sur "Vérifier + créer"
+7. Une fois la validation passée, cliquez sur "Créer"
+
+### d3.png - Tentative de création d'une application web avec des paramètres incompatibles
+
+Pour reproduire cette capture d'écran montrant l'incompatibilité :
+1. Dans le portail Azure, cliquez sur "Créer une ressource"
+2. Recherchez "Web App" et sélectionnez-la
+3. Cliquez sur "Créer"
+4. Dans l'onglet "Informations de base", configurez :
+   - Groupe de ressources : "webApp-RG"
+   - Nom : "BoualiKarim2" (ou autre nom unique)
+   - Publier : "Code"
+   - Pile d'exécution : "Java 8" ou "Python 3.11" (pour tester une pile différente)
+   - Région : "France Central" (pour tester une région différente)
+   - Système d'exploitation : "Windows" (pour tester un OS différent)
+5. Dans la section "Plan tarifaire", tentez de sélectionner "plan-B1" existant
+6. Vous verrez un message d'erreur indiquant l'incompatibilité
+
+Pour résoudre ce problème :
+1. Revenez à la région "East US"
+2. Revenez au système d'exploitation "Linux"
+3. Vous pourrez alors sélectionner le plan "plan-B1" existant
+
+### d4.png - Scale-out manuel du plan B1 de 1 à 2 instances
+
+Pour reproduire cette capture d'écran :
+1. Dans le portail Azure, accédez au groupe de ressources "webApp-RG"
+2. Sélectionnez le plan App Service "plan-B1"
+3. Dans le menu de gauche, cliquez sur "Mise à l'échelle"
+4. Sélectionnez "Scale-out (nombre d'instances)"
+5. Vérifiez que le mode de mise à l'échelle est sur "Manuel"
+6. Changez le nombre d'instances de 1 à 2
+7. Cliquez sur "Enregistrer"
+
+> **Note** : Le plan B1 permet un maximum de 3 instances en scale-out manuel. Pour plus d'instances, un plan supérieur est nécessaire.
+
+### d5.png - Scale-up du plan B1 vers le plan Standard S1
+
+Pour reproduire cette capture d'écran :
+1. Dans le portail Azure, accédez au groupe de ressources "webApp-RG"
+2. Sélectionnez le plan App Service "plan-B1"
+3. Dans le menu de gauche, cliquez sur "Mise à l'échelle"
+4. Sélectionnez "Scale-up (niveau tarifaire)"
+5. Dans les options de niveau, sélectionnez la colonne "Standard"
+6. Choisissez le niveau "S1"
+7. Cliquez sur "Appliquer"
+
+> **Note** : Le passage au plan Standard S1 permet d'accéder à des fonctionnalités supplémentaires comme le scale-out automatique, la redondance interzone et jusqu'à 10 instances.
+
+### d6.png - Configuration des métriques de surveillance pour le plan App Service
+
+Pour reproduire cette capture d'écran :
+1. Dans le portail Azure, accédez au groupe de ressources "webApp-RG"
+2. Sélectionnez le plan App Service (maintenant au niveau S1)
+3. Dans le menu de gauche, cliquez sur "Métriques"
+4. Pour configurer la première métrique :
+   - Cliquez sur "Ajouter une métrique"
+   - Dans le champ "Métrique", sélectionnez "Pourcentage CPU"
+   - Dans "Agrégation", choisissez "Moyenne"
+   - Dans "Type de graphique", sélectionnez "Graphique en courbe"
+5. Pour ajouter une seconde métrique:
+   - Cliquez sur "Ajouter une métrique"
+   - Dans le champ "Métrique", sélectionnez "Pourcentage de mémoire"
+   - Dans "Agrégation", choisissez "Moyenne"
+   - Dans "Type de graphique", sélectionnez "Graphique en aire"
+6. Ajustez la période à surveiller selon vos besoins (ex: dernière heure)
+
+### d7.png - Configuration du scale-out automatique basé sur des règles
+
+Pour reproduire cette capture d'écran :
+1. Dans le portail Azure, accédez au groupe de ressources "webApp-RG"
+2. Sélectionnez le plan App Service (au niveau S1)
+3. Dans le menu de gauche, cliquez sur "Mise à l'échelle"
+4. Sélectionnez "Scale-out (nombre d'instances)"
+5. Changez le mode de mise à l'échelle à "Basé sur une règle"
+6. Configurez les paramètres par défaut :
+   - Instance minimale : 1
+   - Instance maximale : 10
+   - Instance par défaut : 2
+7. Cliquez sur "Ajouter une règle" pour la règle de scale-out :
+   - Nom de la règle : "ScaleOutRule"
+   - Métrique source : "Pourcentage CPU"
+   - Opérateur : "Supérieur à"
+   - Seuil de la métrique : 70%
+   - Durée (minutes) : 5
+   - Action : "Augmenter le nombre de"
+   - Valeur : 1
+   - Temps de refroidissement (minutes) : 5
+8. Cliquez sur "Ajouter" pour valider cette règle
+9. Cliquez sur "Ajouter une règle" pour la règle de scale-in :
+   - Nom de la règle : "ScaleInRule"
+   - Métrique source : "Pourcentage CPU"
+   - Opérateur : "Inférieur à"
+   - Seuil de la métrique : 20%
+   - Durée (minutes) : 5
+   - Action : "Diminuer le nombre de"
+   - Valeur : 1
+   - Temps de refroidissement (minutes) : 5
+10. Cliquez sur "Ajouter" pour valider cette règle
+11. Cliquez sur "Enregistrer"
+
+### d8.png - Déploiement de l'application Java depuis Intellij vers Azure App Service
+
+Pour reproduire cette capture d'écran :
+1. Ouvrez Intellij IDEA
+2. Installez l'extension Azure pour Intellij via File > Settings > Plugins (ou IntelliJ IDEA > Preferences > Plugins sur Mac)
+3. Recherchez "Azure Toolkit for Intellij" et installez-le
+4. Redémarrez Intellij si nécessaire
+5. Ouvrez votre projet Java
+6. Connectez-vous à votre compte Azure via l'onglet Azure dans Intellij
+7. Cliquez droit sur votre projet
+8. Sélectionnez "Azure" > "Deploy to Azure App Service"
+9. Dans la fenêtre qui s'ouvre :
+   - Sélectionnez votre abonnement Azure
+   - Choisissez "BoualiKarim" comme application web cible
+   - Sélectionnez votre artefact de déploiement
+10. Cliquez sur "Deploy"
+11. Attendez que le déploiement se termine
+12. Vérifiez l'application à l'URL : https://boualikarim.azurewebsites.net
+
+### d9.png - Création et configuration d'un emplacement de déploiement pour les tests
+
+Pour reproduire cette capture d'écran :
+1. Dans le portail Azure, accédez à votre application web "BoualiKarim"
+2. Dans le menu de gauche, cliquez sur "Emplacements de déploiement"
+3. Cliquez sur "Ajouter un emplacement"
+4. Dans la fenêtre qui s'ouvre :
+   - Nom : "test"
+   - Cloner les paramètres de : "BoualiKarim (production)"
+5. Cliquez sur "Ajouter"
+6. Une fois l'emplacement créé, il apparaîtra dans la liste des emplacements
+7. Pour déployer du code vers cet emplacement, suivez les mêmes étapes qu'à l'étape d8, mais sélectionnez l'emplacement "test" comme cible
+
+> **Note** : L'URL de votre emplacement de test sera : https://boualikarim-test.azurewebsites.net
+
+### d10.png - Échange entre l'emplacement de test et l'emplacement de production
+
+Pour reproduire cette capture d'écran :
+1. Dans le portail Azure, accédez à votre application web "BoualiKarim"
+2. Dans le menu de gauche, cliquez sur "Emplacements de déploiement"
+3. En haut de la page, cliquez sur "Échanger"
+4. Dans la fenêtre qui s'ouvre :
+   - Source : "test"
+   - Destination : "production"
+5. Vérifiez la configuration de l'échange et les paramètres qui seront échangés
+6. Cliquez sur "Échanger"
+7. Attendez que l'opération d'échange se termine
+8. Vérifiez que votre site de production a bien été mis à jour avec la version de l'emplacement de test
+
+### d11.png - Configuration d'un nom de domaine personnalisé pour l'application web
+
+Pour reproduire cette capture d'écran :
+1. Dans le portail Azure, accédez à votre application web "BoualiKarim"
+2. Dans le menu de gauche, cliquez sur "Noms de domaine personnalisés"
+3. Vous avez deux options :
+
+**Option 1 : Achat d'un domaine via Azure**
+   - Cliquez sur "Acheter un domaine"
+   - Recherchez le nom de domaine souhaité
+   - Suivez les étapes pour l'achat
+   - Le domaine sera automatiquement configuré pour votre application
+
+**Option 2 : Utilisation d'un domaine existant**
+   - Cliquez sur "Ajouter un nom d'hôte personnalisé"
+   - Entrez votre nom de domaine complet (par exemple, www.votredomaine.com)
+   - Suivez les instructions pour créer les enregistrements DNS nécessaires chez votre fournisseur de domaine :
+     - Pour le sous-domaine www : créez un enregistrement CNAME pointant vers [votreapp].azurewebsites.net
+     - Pour le domaine racine : créez un enregistrement A pointant vers l'adresse IP de votre application web
+   - Cliquez sur "Valider" pour vérifier que les enregistrements DNS sont correctement configurés
+   - Une fois validé, cliquez sur "Ajouter un nom d'hôte personnalisé"
+
+> **Note** : Pour utiliser des domaines personnalisés, vous devez avoir au minimum un plan App Service de niveau Basic (B1) ou supérieur.
+
+## Résumé des bonnes pratiques pour Azure App Service
+
+1. **Planification du bon niveau tarifaire** :
+   - Niveau Free ou Shared : pour tests et développement
+   - Niveau Basic (B1) : pour les applications de production à faible trafic
+   - Niveau Standard (S1+) : pour applications de production nécessitant scale-out et haute disponibilité
+   - Niveau Premium : pour performances et fonctionnalités avancées
+
+2. **Optimisation des coûts** :
+   - Héberger plusieurs applications sur un même plan App Service si elles ont des besoins similaires
+   - Configurer le scale-in automatique pour réduire les instances pendant les périodes de faible trafic
+
+3. **Déploiement sécurisé** :
+   - Utiliser les emplacements de déploiement pour tester avant de passer en production
+   - Pratiquer l'échange (swap) d'emplacements pour minimiser les temps d'arrêt
+
+4. **Surveillance** :
+   - Configurer des métriques pour surveiller régulièrement les performances
+   - Configurer des alertes pour être notifié en cas de problèmes
+   - Ajuster les règles de mise à l'échelle automatique en fonction des données de surveillance
+
+5. **Sécurité** :
+   - Configurer HTTPS et les certificats SSL pour sécuriser le trafic
+   - Utiliser les restrictions d'accès IP si nécessaire
+   - Activer l'authentification et l'autorisation appropriées
 
 [Cette section sera complétée ultérieurement]
