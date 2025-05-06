@@ -1,14 +1,51 @@
-# 🚀 Projet-Azure
-## Guide de simulation des captures d'écran du projet Azure
+# (<img align="right" width="400" src="https://postimg.cc/qNDsFYFf" alt="AiAf 3D Landing page animation AI agents">) Projet Azure – Simulation Cloud
+
+Bienvenue dans ce projet de simulation Azure, où vous trouverez une documentation illustrée de la mise en œuvre de services cloud tels que la gestion de machines virtuelles, la haute disponibilité, et l’auto-scaling sur Microsoft Azure.
 
 ---
 
-## 📋 Table des matières
+## Table des matières
 
 - [Introduction](#introduction)
 - [Organisation des captures d'écran](#organisation-des-captures-décran)
-- [Création et gestion des machines virtuelles](#création-et-gestion-des-machines-virtuelles-o1png-à-o6png)
-- [Mise en place de la haute disponibilité et l'auto-scaling](#mise-en-place-de-la-haute-disponibilité-et-lauto-scaling-dans-azure-a1png-à-a5png)
+- [Création et gestion des machines virtuelles](#création-et-gestion-des-machines-virtuelles)
+- [Mise en place de la haute disponibilité & auto-scaling](#mise-en-place-de-la-haute-disponibilité--auto-scaling)
+---
+
+## 🗂️ Organisation des captures d'écran
+
+Les captures d’écran sont classées en trois grandes catégories :
+
+1. **Création des ressources principales** (machines virtuelles, groupes de ressources…)
+2. **Implémentation de la haute disponibilité**
+3. **Configuration de l’auto-scaling**
+
+Chaque capture est nommée de façon à refléter son étape dans le processus (ex : `o1.png`, `a1.png`, etc.).
+
+---
+
+## Création et gestion des machines virtuelles
+
+- `o1.png` à `o6.png` : Création d’un groupe de ressources, configuration du réseau virtuel, déploiement d’une ou plusieurs machines virtuelles, ouverture des ports, etc.
+
+---
+
+## Mise en place de la haute disponibilité & auto-scaling
+
+- `a1.png` à `a5.png` : Mise en place d’un **Load Balancer**, intégration avec les machines virtuelles, ajout d’un groupe de disponibilité, et configuration de la règle d’auto-scaling.
+
+---
+
+## Remarques supplémentaires
+
+- Chaque étape est accompagnée d’une capture pour permettre un suivi visuel précis.
+- Le projet peut être enrichi avec des scripts d’automatisation (CLI Azure, PowerShell, Terraform…) dans une future version.
+
+---
+
+## Contact
+
+Pour toute question ou suggestion, n’hésitez pas à me contacter via [LinkedIn](https://www.linkedin.com) ou à ouvrir une *issue* dans ce dépôt.
 
 ---
 
