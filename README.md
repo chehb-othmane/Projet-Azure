@@ -160,8 +160,6 @@ Pour vérifier que toutes les ressources ont été supprimées, vérifiez votre 
 
 ## Mise en place de la haute disponibilité et l'auto-scaling dans Azure (a1.png à a5.png)
 
-## Mise en place de la haute disponibilité et l'auto-scaling dans Azure (a1.png à a5.png)
-
 Cette section couvre la création d'un groupe à haute disponibilité et d'un ensemble de mise à l'échelle de machines virtuelles (VMSS) dans Azure.
 
 ### a1.png - Création d'un groupe à haute disponibilité dans le portail Azure
