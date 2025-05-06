@@ -298,7 +298,305 @@ Une fois vos tests terminés :
 
 ## Réseaux Virtuels Azure (b1.png à b16.png)
 
-[Cette section sera complétée ultérieurement]
+Cette section couvre la création et la configuration des réseaux virtuels dans Azure, avec un focus sur les communications entre VMs du même réseau, entre VMs de différents réseaux virtuels via le peering, et la mise en place d'une connexion VPN point-à-site.
+
+### b1.png - Création du réseau virtuel BahaSamia-vNet1 avec deux sous-réseaux
+
+Pour reproduire cette capture d'écran :
+1. Connectez-vous au [portail Azure](https://portal.azure.com)
+2. Recherchez "Réseaux virtuels" dans la barre de recherche et cliquez dessus
+3. Cliquez sur "Créer" pour lancer l'assistant de création
+4. Configurez les paramètres de base :
+   - Abonnement : Sélectionnez votre abonnement Azure
+   - Groupe de ressources : Créez un nouveau groupe appelé "vnet-RG"
+   - Nom : "BahaSamia-vNet1"
+   - Région : North Europe
+5. Allez à l'onglet "Adresses IP"
+6. Supprimez l'espace d'adressage par défaut et ajoutez "192.168.0.0/16"
+7. Créez deux sous-réseaux :
+   - Sous-réseau 1 : "Direction" avec l'adresse "192.168.1.0/29"
+   - Sous-réseau 2 : "RH" avec l'adresse "192.168.2.0/28"
+8. Cliquez sur "Vérifier + créer" puis sur "Créer"
+
+### b2.png - Configuration des règles de sécurité pour BahaSamia-NSG1
+
+Pour reproduire cette capture d'écran :
+1. Dans le portail Azure, recherchez "Groupes de sécurité réseau" et cliquez dessus
+2. Cliquez sur "Créer" pour créer un nouveau NSG
+3. Configurez les paramètres de base :
+   - Abonnement : Votre abonnement Azure
+   - Groupe de ressources : "vnet-RG" (le même que pour le réseau virtuel)
+   - Nom : "BahaSamia-NSG1"
+   - Région : North Europe
+4. Cliquez sur "Vérifier + créer" puis sur "Créer"
+5. Une fois le NSG créé, ouvrez-le et allez à "Règles de sécurité de trafic entrant"
+6. Cliquez sur "Ajouter"
+7. Configurez la règle SSH :
+   - Source : Any
+   - Plages de ports source : *
+   - Destination : Any
+   - Service : SSH
+   - Action : Allow
+   - Priorité : 1000 (ou une valeur inférieure à 1001 pour être prioritaire)
+   - Nom : "Allow-SSH"
+8. Cliquez sur "Ajouter"
+
+### b3.png - Association du NSG aux sous-réseaux Direction et RH
+
+Pour reproduire cette capture d'écran :
+1. Dans le portail Azure, ouvrez le NSG "BahaSamia-NSG1"
+2. Dans le menu de gauche, cliquez sur "Sous-réseaux"
+3. Cliquez sur "Associer"
+4. Dans le menu déroulant "Réseau virtuel", sélectionnez "BahaSamia-vNet1"
+5. Dans le menu déroulant "Sous-réseau", sélectionnez "Direction"
+6. Cliquez sur "OK"
+7. Répétez les étapes 3 à 6 pour associer le NSG au sous-réseau "RH"
+8. Vous devriez maintenant voir les deux sous-réseaux associés au NSG
+
+### b4.png - Création de VM1 dans le sous-réseau Direction
+
+Pour reproduire cette capture d'écran :
+1. Dans le portail Azure, accédez à "Machines virtuelles"
+2. Cliquez sur "Créer" puis sélectionnez "Machine virtuelle"
+3. Configurez les paramètres de base :
+   - Abonnement : Votre abonnement Azure
+   - Groupe de ressources : "vnet-RG"
+   - Nom de la machine virtuelle : "VM1"
+   - Région : North Europe (même région que le réseau virtuel)
+   - Image : Ubuntu Server 20.04 LTS
+   - Taille : Standard B1s
+4. Configurez l'authentification avec un nom d'utilisateur et une clé SSH ou un mot de passe
+5. Allez à l'onglet "Mise en réseau"
+6. Pour "Réseau virtuel", sélectionnez "BahaSamia-vNet1"
+7. Pour "Sous-réseau", sélectionnez "Direction (192.168.1.0/29)"
+8. Pour "Adresse IP publique", conservez l'option par défaut
+9. Pour "Groupe de sécurité réseau de carte réseau", sélectionnez "Aucun" (car nous utilisons déjà le NSG au niveau du sous-réseau)
+10. Désactivez "Supprimer automatiquement l'IP publique lorsque la machine virtuelle est supprimée"
+11. Cliquez sur "Vérifier + créer" puis sur "Créer"
+
+### b5.png - Test de ping entre VM1 et VM2 du même réseau virtuel
+
+Pour reproduire cette capture d'écran :
+1. Créez une deuxième VM nommée "VM2" en suivant les mêmes étapes que pour VM1, mais placez-la dans le sous-réseau "RH"
+2. Connectez-vous à VM1 via SSH :
+   ```bash
+   ssh votre_nom_utilisateur@adresse_ip_publique_vm1
+   ```
+3. Une fois connecté à VM1, exécutez un ping vers l'adresse IP privée de VM2 :
+   ```bash
+   ping 192.168.2.4
+   ```
+4. Vous devriez voir les réponses du ping, indiquant que la communication entre les deux VMs fonctionne correctement
+5. Prenez une capture d'écran du résultat du ping
+
+### b6.png - Diagramme du réseau pour l'exercice 1
+
+Pour reproduire cette capture d'écran :
+1. Cette image est un diagramme conceptuel du réseau configuré dans l'exercice 1
+2. Vous pouvez créer un diagramme similaire en utilisant un outil comme draw.io ou Microsoft Visio
+3. Représentez les éléments suivants dans votre diagramme :
+   - Le réseau virtuel BahaSamia-vNet1 (192.168.0.0/16)
+   - Les deux sous-réseaux Direction (192.168.1.0/29) et RH (192.168.2.0/28)
+   - Les deux machines virtuelles VM1 et VM2 avec leurs adresses IP privées
+   - Le groupe de sécurité réseau BahaSamia-NSG1 associé aux deux sous-réseaux
+   - Des flèches indiquant la communication entre VM1 et VM2
+
+### b7.png - Création du réseau virtuel BahaSamia-vNet2 avec un sous-réseau
+
+Pour reproduire cette capture d'écran :
+1. Dans le portail Azure, accédez à "Réseaux virtuels"
+2. Cliquez sur "Créer"
+3. Configurez les paramètres de base :
+   - Abonnement : Votre abonnement Azure
+   - Groupe de ressources : "vnet-RG" (même groupe que le premier réseau virtuel)
+   - Nom : "BahaSamia-vNet2"
+   - Région : France Central (une région différente du premier réseau virtuel)
+4. Allez à l'onglet "Adresses IP"
+5. Supprimez l'espace d'adressage par défaut et ajoutez "172.16.0.0/16"
+6. Créez un sous-réseau nommé "Personnel" avec l'adresse "172.16.1.0/24"
+7. Cliquez sur "Vérifier + créer" puis sur "Créer"
+
+### b8.png - Création de VM3 dans le sous-réseau Personnel
+
+Pour reproduire cette capture d'écran :
+1. Dans le portail Azure, accédez à "Machines virtuelles"
+2. Cliquez sur "Créer" puis sélectionnez "Machine virtuelle"
+3. Configurez les paramètres de base :
+   - Abonnement : Votre abonnement Azure
+   - Groupe de ressources : "vnet-RG"
+   - Nom de la machine virtuelle : "VM3"
+   - Région : France Central (même région que BahaSamia-vNet2)
+   - Image : Ubuntu Server 20.04 LTS
+   - Taille : Standard B1s
+4. Configurez l'authentification avec un nom d'utilisateur et une clé SSH ou un mot de passe
+5. Allez à l'onglet "Mise en réseau"
+6. Pour "Réseau virtuel", sélectionnez "BahaSamia-vNet2"
+7. Pour "Sous-réseau", sélectionnez "Personnel (172.16.1.0/24)"
+8. Pour les paramètres de sécurité, autorisez le port SSH (22)
+9. Cliquez sur "Vérifier + créer" puis sur "Créer"
+
+### b9.png - Échec du test de ping entre VM1 et VM3 avant le peering
+
+Pour reproduire cette capture d'écran :
+1. Connectez-vous à VM1 via SSH
+2. Essayez de faire un ping vers l'adresse IP privée de VM3 :
+   ```bash
+   ping 172.16.1.4
+   ```
+3. Vous devriez voir que le ping échoue, car par défaut, les réseaux virtuels dans Azure sont isolés les uns des autres
+4. Prenez une capture d'écran du résultat du ping (qui devrait montrer des timeouts)
+
+### b10.png - Configuration du peering entre les deux réseaux virtuels
+
+Pour reproduire cette capture d'écran :
+1. Dans le portail Azure, accédez au réseau virtuel "BahaSamia-vNet1"
+2. Dans le menu de gauche, cliquez sur "Peerings"
+3. Cliquez sur "Ajouter" pour créer un nouveau peering
+4. Configurez les paramètres du peering :
+   - Nom du peering de ce réseau virtuel vers le réseau virtuel distant : "vNet1-to-vNet2"
+   - Réseau virtuel distant : Sélectionnez "BahaSamia-vNet2"
+   - Nom du peering du réseau virtuel distant vers ce réseau virtuel : "vNet2-to-vNet1"
+5. Laissez les autres paramètres par défaut
+6. Cliquez sur "Ajouter"
+7. Prenez une capture d'écran de la configuration du peering
+
+### b11.png - Test de ping réussi entre VM1 et VM3 après la configuration du peering
+
+Pour reproduire cette capture d'écran :
+1. Connectez-vous à VM1 via SSH
+2. Essayez à nouveau de faire un ping vers l'adresse IP privée de VM3 :
+   ```bash
+   ping 172.16.1.4
+   ```
+3. Cette fois, le ping devrait réussir, confirmant que le peering permet la communication entre les réseaux virtuels
+4. Prenez une capture d'écran du résultat du ping réussi
+
+### b12.png - Diagramme du réseau pour l'exercice 2
+
+Pour reproduire cette capture d'écran :
+1. Créez un diagramme conceptuel représentant la configuration du réseau après la mise en place du peering
+2. Représentez les éléments suivants dans votre diagramme :
+   - Les deux réseaux virtuels BahaSamia-vNet1 (192.168.0.0/16) et BahaSamia-vNet2 (172.16.0.0/16)
+   - Tous les sous-réseaux : Direction, RH et Personnel
+   - Les trois machines virtuelles VM1, VM2 et VM3 avec leurs adresses IP privées
+   - Le groupe de sécurité réseau BahaSamia-NSG1
+   - La connexion de peering entre les deux réseaux virtuels
+   - Des flèches indiquant la communication entre VM1 et VM3
+
+### b13.png - Création du réseau virtuel pour l'exercice 3
+
+Pour reproduire cette capture d'écran :
+1. Supprimez d'abord toutes les ressources des exercices précédents
+2. Dans le portail Azure, accédez à "Réseaux virtuels"
+3. Cliquez sur "Créer"
+4. Configurez les paramètres de base :
+   - Abonnement : Votre abonnement Azure
+   - Groupe de ressources : "vnet-RG"
+   - Nom : "BahaSamia-vNet1"
+   - Région : France Central
+5. Allez à l'onglet "Adresses IP"
+6. Supprimez l'espace d'adressage par défaut et ajoutez "172.16.0.0/16"
+7. Créez un sous-réseau nommé "Personnel" avec l'adresse "172.16.1.0/24"
+8. Cliquez sur "Vérifier + créer" puis sur "Créer"
+
+### b14.png - Création de la passerelle de réseau virtuel
+
+Pour reproduire cette capture d'écran :
+1. Dans le portail Azure, recherchez "Passerelles de réseau virtuel" et cliquez dessus
+2. Cliquez sur "Créer"
+3. Configurez les paramètres de base :
+   - Abonnement : Votre abonnement Azure
+   - Groupe de ressources : "vnet-RG"
+   - Nom : "BahaSamia-VPN-gateway1"
+   - Région : France Central (même région que le réseau virtuel)
+   - Type de passerelle : VPN
+   - Type de VPN : Basé sur des itinéraires
+   - SKU : De base
+   - Génération : Generation1
+   - Réseau virtuel : "BahaSamia-vNet1"
+4. Un sous-réseau de passerelle sera automatiquement créé avec l'adresse "172.16.2.0/24"
+5. Configurez une nouvelle adresse IP publique nommée "VPN-ip1"
+6. Cliquez sur "Vérifier + créer" puis sur "Créer"
+7. Prenez note que le déploiement peut prendre jusqu'à 45 minutes
+
+### b15.png - Exportation des certificats pour la connexion VPN
+
+Pour reproduire cette capture d'écran :
+1. Sur votre machine Windows locale, ouvrez PowerShell en tant qu'administrateur
+2. Générez un certificat racine auto-signé avec PowerShell :
+   ```powershell
+   $cert = New-SelfSignedCertificate -Type Custom -KeySpec Signature -Subject "CN=P2SRootCert" -KeyExportPolicy Exportable -HashAlgorithm sha256 -KeyLength 2048 -CertStoreLocation "Cert:\CurrentUser\My" -KeyUsageProperty Sign -KeyUsage CertSign
+   ```
+3. Générez un certificat client avec PowerShell :
+   ```powershell
+   New-SelfSignedCertificate -Type Custom -DnsName P2SChildCert -KeySpec Signature -Subject "CN=P2SChildCert" -KeyExportPolicy Exportable -HashAlgorithm sha256 -KeyLength 2048 -CertStoreLocation "Cert:\CurrentUser\My" -Signer $cert -TextExtension @("2.5.29.37={text}1.3.6.1.5.5.7.3.2")
+   ```
+4. Exportez le certificat racine au format .cer (sans la clé privée) :
+   - Ouvrez le gestionnaire de certificats (certmgr.msc)
+   - Naviguez jusqu'à Personnel > Certificats
+   - Cliquez avec le bouton droit sur le certificat "P2SRootCert"
+   - Sélectionnez "Toutes les tâches" > "Exporter"
+   - Suivez l'assistant et sélectionnez "Non, ne pas exporter la clé privée"
+   - Sélectionnez le format X.509 encodé en base 64 (.CER)
+   - Enregistrez le fichier
+5. Exportez le certificat client au format .pfx (avec la clé privée) :
+   - Cliquez avec le bouton droit sur le certificat "P2SChildCert"
+   - Sélectionnez "Toutes les tâches" > "Exporter"
+   - Suivez l'assistant et sélectionnez "Oui, exporter la clé privée"
+   - Sélectionnez le format PKCS #12 (.PFX)
+   - Définissez un mot de passe pour protéger le certificat
+   - Enregistrez le fichier
+6. Prenez une capture d'écran du processus d'exportation
+
+### b16.png - Configuration point-à-site de la passerelle VPN
+
+Pour reproduire cette capture d'écran :
+1. Une fois la passerelle VPN déployée, accédez-y dans le portail Azure
+2. Dans le menu de gauche, cliquez sur "Configuration point-à-site"
+3. Configurez les paramètres suivants :
+   - Pool d'adresses : "192.168.1.0/24" (plage d'adresses pour les clients VPN)
+   - Type de tunnel : OpenVPN (SSL)
+   - Type d'authentification : Certificat Azure
+4. Sous "Certificats racine", cliquez sur "Ajouter un certificat"
+5. Donnez un nom au certificat (par exemple, "BahaSamia-Root")
+6. Ouvrez le fichier .cer exporté précédemment avec un éditeur de texte et copiez tout le contenu (y compris les lignes BEGIN CERTIFICATE et END CERTIFICATE)
+7. Collez ce contenu dans le champ "Données du certificat public"
+8. Cliquez sur "Enregistrer"
+9. Prenez une capture d'écran de la configuration point-à-site
+
+### Test de la connexion VPN point-à-site
+
+Pour tester la connexion VPN point-à-site :
+1. Dans la configuration point-à-site de la passerelle VPN, cliquez sur "Télécharger le client VPN"
+2. Sélectionnez le client approprié pour votre système d'exploitation
+3. Téléchargez et installez le client VPN sur votre machine locale
+4. Avant de démarrer la connexion VPN, notez votre adresse IP privée actuelle :
+   ```
+   ipconfig
+   ```
+5. Importez le certificat client (.pfx) si nécessaire
+6. Lancez le client VPN et connectez-vous au réseau virtuel Azure
+7. Une fois connecté, vérifiez votre nouvelle adresse IP :
+   ```
+   ipconfig
+   ```
+8. Créez une VM dans le sous-réseau "Personnel" du réseau virtuel si ce n'est pas déjà fait
+9. Testez la connectivité en faisant un ping vers l'adresse IP privée de cette VM :
+   ```
+   ping 172.16.1.4
+   ```
+10. Le ping devrait réussir, confirmant que la connexion VPN fonctionne correctement
+
+### Nettoyage des ressources
+
+Après avoir terminé tous les exercices, nettoyez les ressources pour éviter des frais inutiles :
+1. Déconnectez le client VPN
+2. Dans le portail Azure, accédez à "Groupes de ressources"
+3. Sélectionnez le groupe de ressources "vnet-RG"
+4. Cliquez sur "Supprimer le groupe de ressources"
+5. Confirmez la suppression en saisissant le nom du groupe de ressources
+6. Cliquez sur "Supprimer"
+7. Attendez que toutes les ressources soient supprimées
 
 ## Création et gestion du stockage Azure (c1.png à c7.png)
 
