@@ -1,6 +1,6 @@
-<a href="https://freeimage.host/i/3OzGUps">
-  <img src="https://iili.io/3OzGUps.md.png" alt="Projet Azure – Simulation Cloud" width="50" style="border:0;">
-</a> Projet Azure – Simulation Cloud
+[![Projet Azure – Simulation Cloud](https://iili.io/3OzGUps.md.png)](https://freeimage.host/i/3OzGUps)
+Projet Azure – Simulation Cloud
+
 
 Bienvenue dans ce projet de simulation Azure, où vous trouverez une documentation illustrée de la mise en œuvre de services cloud tels que la gestion de machines virtuelles, la haute disponibilité, et l’auto-scaling sur Microsoft Azure.
 
