@@ -1,6 +1,5 @@
+<a href="https://freeimage.host/i/3OzGUps"><img src="https://iili.io/3OzGUps.md.png" alt="3OzGUps.md.png" border="0"></a>
 # Projet Azure – Simulation Cloud
-<img align="right" width="400" src="https://postimg.cc/qNDsFYFf" alt="AiAf 3D Landing page animation AI agents">
-
 
 Bienvenue dans ce projet de simulation Azure, où vous trouverez une documentation illustrée de la mise en œuvre de services cloud tels que la gestion de machines virtuelles, la haute disponibilité, et l’auto-scaling sur Microsoft Azure.
 
