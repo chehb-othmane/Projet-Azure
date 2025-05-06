@@ -1,20 +1,39 @@
-# Projet-Azure
-# Guide de simulation des captures d'écran du projet Azure
+# 🚀 Projet-Azure
+## Guide de simulation des captures d'écran du projet Azure
+
+---
+
+## 📋 Table des matières
+
+- [Introduction](#introduction)
+- [Organisation des captures d'écran](#organisation-des-captures-décran)
+- [Création et gestion des machines virtuelles](#création-et-gestion-des-machines-virtuelles-o1png-à-o6png)
+- [Mise en place de la haute disponibilité et l'auto-scaling](#mise-en-place-de-la-haute-disponibilité-et-lauto-scaling-dans-azure-a1png-à-a5png)
+
+---
+
+## Introduction
 
 Bonjour,
 
 Je vais vous donner dans ce fichier README les étapes pour simuler chaque capture d'écran présente dans mon rapport Azure. Pour chaque image (o1.png à d11.png), je vais détailler la procédure à suivre sur le portail Azure.
 
-**Note** : 
-- Création et gestion des MV -> o1.png à o5.png
-- Mise en place de la haute disponibilité et l'auto-scaling dans Azure -> a1.png à a5.png
-- Réseaux Virtuels Azure -> b1.png à b16.png
-- Création et gestion du stockage Azure -> c1.png à c7.png
-- Azure App Service -> d1 à d11
+## Organisation des captures d'écran
 
-## Création et gestion des machines virtuelles (o1.png à o6.png)
+| Série | Description | Images |
+|:-----:|:------------|:-------|
+| **O** | Création et gestion des MV | o1.png à o5.png |
+| **A** | Haute disponibilité et auto-scaling | a1.png à a5.png |
+| **B** | Réseaux Virtuels Azure | b1.png à b16.png |
+| **C** | Création et gestion du stockage Azure | c1.png à c7.png |
+| **D** | Azure App Service | d1.png à d11.png |
 
-### o1.png - Interface de création d'une machine virtuelle Azure
+---
+
+## Création et gestion des machines virtuelles
+> *Guide pratique étape par étape avec captures d'écran (o1.png à o6.png)*
+
+### 🖥️ o1.png - Interface de création d'une machine virtuelle Azure
 
 Pour reproduire cette capture d'écran :
 1. Connectez-vous au [portail Azure](https://portal.azure.com)
@@ -23,7 +42,7 @@ Pour reproduire cette capture d'écran :
 4. Cliquez sur "Créer" > "Machine virtuelle Azure"
 5. Vous devriez maintenant voir l'interface de base de création d'une VM
 
-### o2.png - Configuration du nom de la VM
+### ⚙️ o2.png - Configuration du nom de la VM
 
 Pour reproduire cette capture d'écran :
 1. Dans l'interface de création de VM, sous l'onglet "Bases"
@@ -38,9 +57,9 @@ Pour reproduire cette capture d'écran :
    - Image : Windows Server 2016 Datacenter--x64 Gen2
    - Taille : Standard B1s
 
-> **Note**: Si vous rencontrez un problème avec la taille B1s et les zones de disponibilité, essayez de ne sélectionner que la Zone 1, ou optez pour une série de VM plus grande comme D2s_v3.
+> **💡 Note**: Si vous rencontrez un problème avec la taille B1s et les zones de disponibilité, essayez de ne sélectionner que la Zone 1, ou optez pour une série de VM plus grande comme D2s_v3.
 
-### o4.png - Configuration du disque OS
+### 💾 o4.png - Configuration du disque OS
 
 Pour reproduire cette capture d'écran :
 1. Dans l'interface de création de VM, allez à l'onglet "Disques"
@@ -48,7 +67,7 @@ Pour reproduire cette capture d'écran :
 3. Pour "Option de redondance", sélectionnez "Stockage localement redondant (LRS)"
 4. La taille standard de 127 GiB devrait être automatiquement configurée
 
-### o5.png - Obtention des informations de connexion RDP
+### 🔌 o5.png - Obtention des informations de connexion RDP
 
 Pour reproduire cette capture d'écran :
 1. Une fois la VM déployée, accédez à la ressource dans le portail Azure
@@ -57,7 +76,7 @@ Pour reproduire cette capture d'écran :
 4. Sélectionnez "RDP" dans les options de connexion
 5. Vous verrez alors les informations de connexion RDP, y compris l'adresse IP publique
 
-### o6.png - Erreur de connexion RDP
+### ❌ o6.png - Erreur de connexion RDP
 
 Cette capture montre une erreur de connexion RDP. Pour simuler cette situation :
 1. Essayez de vous connecter à votre VM via RDP avant d'avoir configuré les règles de sécurité réseau
@@ -70,7 +89,9 @@ Pour résoudre ce problème et continuer :
 4. Vérifiez qu'une règle entrante pour le port 3389 (RDP) existe
 5. Si ce n'est pas le cas, ajoutez une nouvelle règle de port d'entrée pour autoriser le trafic RDP (TCP/3389)
 
-## Ajout d'un disque de données
+---
+
+## 💿 Ajout d'un disque de données
 
 Après avoir établi une connexion RDP réussie, vous pouvez ajouter un disque de données :
 
@@ -87,7 +108,9 @@ Après avoir ajouté le disque dans Azure, connectez-vous à la VM via RDP pour 
 4. Formatez le disque en NTFS
 5. Assignez-lui la lettre de lecteur E:
 
-## Modification de la taille de la VM
+---
+
+## 📊 Modification de la taille de la VM
 
 Pour changer la taille de votre VM :
 1. Dans le portail Azure, accédez à votre VM
@@ -95,9 +118,11 @@ Pour changer la taille de votre VM :
 3. Choisissez la taille B2s (2 vCPU, 4 GiB de RAM)
 4. Confirmez le changement
 
-> **Note**: Cette opération nécessitera le redémarrage de la VM, planifiez-la pendant une période de faible activité.
+> **⚠️ Note**: Cette opération nécessitera le redémarrage de la VM, planifiez-la pendant une période de faible activité.
 
-## Capture d'une image de la VM
+---
+
+## 📷 Capture d'une image de la VM
 
 Pour capturer une image de votre VM :
 1. Dans le portail Azure, accédez à votre VM
@@ -115,7 +140,9 @@ Si vous rencontrez des problèmes avec la capture d'image, vous pouvez créer un
 4. Configurez un nom et un type de stockage
 5. Créez l'instantané
 
-## Surveillance de la VM
+---
+
+## 📈 Surveillance de la VM
 
 Pour configurer la surveillance de votre VM :
 1. Dans le portail Azure, accédez à votre VM
@@ -140,7 +167,9 @@ Pour la surveillance complète de la mémoire, installez l'extension de diagnost
 3. Sélectionnez "Azure Diagnostics Extension"
 4. Configurez la collecte des compteurs de performance supplémentaires
 
-## Arrêt et suppression de la VM
+---
+
+## 🛑 Arrêt et suppression de la VM
 
 Pour arrêter votre VM :
 1. Accédez à votre VM dans le portail Azure
@@ -158,11 +187,14 @@ Pour supprimer la VM et les ressources associées :
 
 Pour vérifier que toutes les ressources ont été supprimées, vérifiez votre groupe de ressources pour vous assurer qu'aucune ressource liée à votre VM n'est encore présente.
 
-## Mise en place de la haute disponibilité et l'auto-scaling dans Azure (a1.png à a5.png)
+---
+
+## Mise en place de la haute disponibilité et l'auto-scaling dans Azure
+> *Guide pratique étape par étape avec captures d'écran (a1.png à a5.png)*
 
 Cette section couvre la création d'un groupe à haute disponibilité et d'un ensemble de mise à l'échelle de machines virtuelles (VMSS) dans Azure.
 
-### a1.png - Création d'un groupe à haute disponibilité dans le portail Azure
+### 🔄 a1.png - Création d'un groupe à haute disponibilité dans le portail Azure
 
 Pour reproduire cette capture d'écran :
 1. Connectez-vous au [portail Azure](https://portal.azure.com)
@@ -177,7 +209,7 @@ Pour reproduire cette capture d'écran :
    - Domaines de mise à jour : 5 (valeur par défaut)
 5. Cliquez sur "Vérifier + créer" puis sur "Créer"
 
-### a2.png - Création d'une VM Windows dans le groupe à haute disponibilité
+### 🖥️ a2.png - Création d'une VM Windows dans le groupe à haute disponibilité
 
 Pour reproduire cette capture d'écran :
 1. Dans le portail Azure, accédez à "Machines virtuelles"
@@ -195,7 +227,7 @@ Pour reproduire cette capture d'écran :
 5. Continuez avec les paramètres par défaut pour les autres sections
 6. Cliquez sur "Vérifier + créer" puis sur "Créer"
 
-### a3.png - Liste des machines virtuelles créées dans le groupe à haute disponibilité
+### 📋 a3.png - Liste des machines virtuelles créées dans le groupe à haute disponibilité
 
 Pour reproduire cette capture d'écran :
 1. Créez trois machines virtuelles dans le groupe à haute disponibilité comme indiqué ci-dessus :
@@ -205,7 +237,7 @@ Pour reproduire cette capture d'écran :
 2. Une fois toutes les VM créées, accédez à "Machines virtuelles" dans le portail Azure
 3. Vous devriez voir la liste de toutes vos VM avec leurs états respectifs
 
-### a4.png - Domaines d'erreur et de mise à jour pour une VM dans le groupe à haute disponibilité
+### 🔍 a4.png - Domaines d'erreur et de mise à jour pour une VM dans le groupe à haute disponibilité
 
 Pour reproduire cette capture d'écran :
 1. Dans le portail Azure, accédez à la machine virtuelle "win-vm-1"
@@ -214,7 +246,7 @@ Pour reproduire cette capture d'écran :
 4. Notez les valeurs pour le domaine d'erreur (0) et le domaine de mise à jour (0)
 5. Répétez cette opération pour les autres VM pour observer leur distribution dans les différents domaines
 
-### a5.png - Suppression du groupe de ressources et des ressources associées
+### 🗑️ a5.png - Suppression du groupe de ressources et des ressources associées
 
 Pour reproduire cette capture d'écran :
 1. Dans le portail Azure, accédez à "Groupes de ressources"
@@ -223,7 +255,9 @@ Pour reproduire cette capture d'écran :
 4. Dans la boîte de dialogue qui s'affiche, saisissez le nom du groupe de ressources "TP-HA-RG" pour confirmer la suppression
 5. Cliquez sur "Supprimer"
 
-### Création d'un ensemble de mise à l'échelle de machines virtuelles (VMSS)
+---
+
+## 📊 Création d'un ensemble de mise à l'échelle de machines virtuelles (VMSS)
 
 Pour créer un VMSS comme dans l'exercice 3 du rapport :
 1. Dans le portail Azure, recherchez "Ensembles de mise à l'échelle de machines virtuelles"
@@ -246,7 +280,7 @@ Pour créer un VMSS comme dans l'exercice 3 du rapport :
    - Nombre souhaité d'instances : 3
 5. Cliquez sur "Vérifier + créer" puis sur "Créer"
 
-### Configuration de l'auto-scaling pour le VMSS
+### ⚖️ Configuration de l'auto-scaling pour le VMSS
 
 Pour configurer l'auto-scaling une fois le VMSS créé :
 1. Accédez à votre VMSS dans le portail Azure
@@ -274,7 +308,7 @@ Pour configurer l'auto-scaling une fois le VMSS créé :
 
 5. Enregistrez les règles d'auto-scaling
 
-### Test de l'auto-scaling
+### 🧪 Test de l'auto-scaling
 
 Pour tester l'auto-scaling de votre VMSS :
 1. Accédez à la section "Instances" de votre VMSS pour vérifier que les 3 instances initiales sont bien créées
@@ -287,7 +321,7 @@ Pour tester l'auto-scaling de votre VMSS :
 5. Observez dans le portail Azure que le VMSS détecte l'augmentation de la charge CPU
 6. Après environ 10 minutes, vérifiez que le VMSS a ajouté une instance supplémentaire (passage de 3 à 4 instances)
 
-### Suppression des ressources VMSS
+### 🗑️ Suppression des ressources VMSS
 
 Une fois vos tests terminés :
 1. Accédez à "Groupes de ressources" dans le portail Azure
@@ -296,54 +330,59 @@ Une fois vos tests terminés :
 4. Confirmez la suppression en saisissant le nom du groupe de ressources
 5. Cliquez sur "Supprimer"
 
-## Réseaux Virtuels Azure (b1.png à b16.png)
+# 🌐 Réseaux Virtuels Azure
+> *Guide pratique étape par étape avec captures d'écran (b1.png à b16.png)*
 
-Cette section couvre la création et la configuration des réseaux virtuels dans Azure, avec un focus sur les communications entre VMs du même réseau, entre VMs de différents réseaux virtuels via le peering, et la mise en place d'une connexion VPN point-à-site.
 
-### b1.png - Création du réseau virtuel BahaSamia-vNet1 avec deux sous-réseaux
+---
 
-Pour reproduire cette capture d'écran :
+## Communication entre VMs d'un même réseau
+
+### 📌 b1.png - Création du réseau virtuel BahaSamia-vNet1 avec deux sous-réseaux
+
 1. Connectez-vous au [portail Azure](https://portal.azure.com)
 2. Recherchez "Réseaux virtuels" dans la barre de recherche et cliquez dessus
 3. Cliquez sur "Créer" pour lancer l'assistant de création
-4. Configurez les paramètres de base :
-   - Abonnement : Sélectionnez votre abonnement Azure
-   - Groupe de ressources : Créez un nouveau groupe appelé "vnet-RG"
-   - Nom : "BahaSamia-vNet1"
-   - Région : North Europe
+4. Configurez les paramètres de base:
+   - **Abonnement**: Sélectionnez votre abonnement Azure
+   - **Groupe de ressources**: Créez un nouveau groupe appelé "vnet-RG"
+   - **Nom**: "BahaSamia-vNet1"
+   - **Région**: North Europe
 5. Allez à l'onglet "Adresses IP"
-6. Supprimez l'espace d'adressage par défaut et ajoutez "192.168.0.0/16"
-7. Créez deux sous-réseaux :
-   - Sous-réseau 1 : "Direction" avec l'adresse "192.168.1.0/29"
-   - Sous-réseau 2 : "RH" avec l'adresse "192.168.2.0/28"
+6. Supprimez l'espace d'adressage par défaut et ajoutez `192.168.0.0/16`
+7. Créez deux sous-réseaux:
+   - **Sous-réseau 1**: "Direction" avec l'adresse `192.168.1.0/29`
+   - **Sous-réseau 2**: "RH" avec l'adresse `192.168.2.0/28`
 8. Cliquez sur "Vérifier + créer" puis sur "Créer"
 
-### b2.png - Configuration des règles de sécurité pour BahaSamia-NSG1
+### 🔒 b2.png - Configuration des règles de sécurité pour BahaSamia-NSG1
 
-Pour reproduire cette capture d'écran :
 1. Dans le portail Azure, recherchez "Groupes de sécurité réseau" et cliquez dessus
 2. Cliquez sur "Créer" pour créer un nouveau NSG
-3. Configurez les paramètres de base :
-   - Abonnement : Votre abonnement Azure
-   - Groupe de ressources : "vnet-RG" (le même que pour le réseau virtuel)
-   - Nom : "BahaSamia-NSG1"
-   - Région : North Europe
+3. Configurez les paramètres de base:
+   - **Abonnement**: Votre abonnement Azure
+   - **Groupe de ressources**: "vnet-RG" (le même que pour le réseau virtuel)
+   - **Nom**: "BahaSamia-NSG1"
+   - **Région**: North Europe
 4. Cliquez sur "Vérifier + créer" puis sur "Créer"
 5. Une fois le NSG créé, ouvrez-le et allez à "Règles de sécurité de trafic entrant"
 6. Cliquez sur "Ajouter"
-7. Configurez la règle SSH :
-   - Source : Any
-   - Plages de ports source : *
-   - Destination : Any
-   - Service : SSH
-   - Action : Allow
-   - Priorité : 1000 (ou une valeur inférieure à 1001 pour être prioritaire)
-   - Nom : "Allow-SSH"
+7. Configurez la règle SSH:
+
+   | Paramètre | Valeur |
+   |-----------|--------|
+   | Source | Any |
+   | Plages de ports source | * |
+   | Destination | Any |
+   | Service | SSH |
+   | Action | Allow |
+   | Priorité | 1000 |
+   | Nom | "Allow-SSH" |
+
 8. Cliquez sur "Ajouter"
 
-### b3.png - Association du NSG aux sous-réseaux Direction et RH
+### 🔗 b3.png - Association du NSG aux sous-réseaux Direction et RH
 
-Pour reproduire cette capture d'écran :
 1. Dans le portail Azure, ouvrez le NSG "BahaSamia-NSG1"
 2. Dans le menu de gauche, cliquez sur "Sous-réseaux"
 3. Cliquez sur "Associer"
@@ -353,18 +392,17 @@ Pour reproduire cette capture d'écran :
 7. Répétez les étapes 3 à 6 pour associer le NSG au sous-réseau "RH"
 8. Vous devriez maintenant voir les deux sous-réseaux associés au NSG
 
-### b4.png - Création de VM1 dans le sous-réseau Direction
+### 💻 b4.png - Création de VM1 dans le sous-réseau Direction
 
-Pour reproduire cette capture d'écran :
 1. Dans le portail Azure, accédez à "Machines virtuelles"
 2. Cliquez sur "Créer" puis sélectionnez "Machine virtuelle"
-3. Configurez les paramètres de base :
-   - Abonnement : Votre abonnement Azure
-   - Groupe de ressources : "vnet-RG"
-   - Nom de la machine virtuelle : "VM1"
-   - Région : North Europe (même région que le réseau virtuel)
-   - Image : Ubuntu Server 20.04 LTS
-   - Taille : Standard B1s
+3. Configurez les paramètres de base:
+   - **Abonnement**: Votre abonnement Azure
+   - **Groupe de ressources**: "vnet-RG"
+   - **Nom de la machine virtuelle**: "VM1"
+   - **Région**: North Europe (même région que le réseau virtuel)
+   - **Image**: Ubuntu Server 20.04 LTS
+   - **Taille**: Standard B1s
 4. Configurez l'authentification avec un nom d'utilisateur et une clé SSH ou un mot de passe
 5. Allez à l'onglet "Mise en réseau"
 6. Pour "Réseau virtuel", sélectionnez "BahaSamia-vNet1"
@@ -374,60 +412,60 @@ Pour reproduire cette capture d'écran :
 10. Désactivez "Supprimer automatiquement l'IP publique lorsque la machine virtuelle est supprimée"
 11. Cliquez sur "Vérifier + créer" puis sur "Créer"
 
-### b5.png - Test de ping entre VM1 et VM2 du même réseau virtuel
+### 🔄 b5.png - Test de ping entre VM1 et VM2 du même réseau virtuel
 
-Pour reproduire cette capture d'écran :
 1. Créez une deuxième VM nommée "VM2" en suivant les mêmes étapes que pour VM1, mais placez-la dans le sous-réseau "RH"
-2. Connectez-vous à VM1 via SSH :
+2. Connectez-vous à VM1 via SSH:
    ```bash
    ssh votre_nom_utilisateur@adresse_ip_publique_vm1
    ```
-3. Une fois connecté à VM1, exécutez un ping vers l'adresse IP privée de VM2 :
+3. Une fois connecté à VM1, exécutez un ping vers l'adresse IP privée de VM2:
    ```bash
    ping 192.168.2.4
    ```
 4. Vous devriez voir les réponses du ping, indiquant que la communication entre les deux VMs fonctionne correctement
 5. Prenez une capture d'écran du résultat du ping
 
-### b6.png - Diagramme du réseau pour l'exercice 1
+### 📊 b6.png - Diagramme du réseau pour l'exercice 1
 
-Pour reproduire cette capture d'écran :
 1. Cette image est un diagramme conceptuel du réseau configuré dans l'exercice 1
 2. Vous pouvez créer un diagramme similaire en utilisant un outil comme draw.io ou Microsoft Visio
-3. Représentez les éléments suivants dans votre diagramme :
+3. Représentez les éléments suivants dans votre diagramme:
    - Le réseau virtuel BahaSamia-vNet1 (192.168.0.0/16)
    - Les deux sous-réseaux Direction (192.168.1.0/29) et RH (192.168.2.0/28)
    - Les deux machines virtuelles VM1 et VM2 avec leurs adresses IP privées
    - Le groupe de sécurité réseau BahaSamia-NSG1 associé aux deux sous-réseaux
    - Des flèches indiquant la communication entre VM1 et VM2
 
-### b7.png - Création du réseau virtuel BahaSamia-vNet2 avec un sous-réseau
+---
 
-Pour reproduire cette capture d'écran :
+## Communication entre VMs de différents réseaux via Peering
+
+### 📌 b7.png - Création du réseau virtuel BahaSamia-vNet2 avec un sous-réseau
+
 1. Dans le portail Azure, accédez à "Réseaux virtuels"
 2. Cliquez sur "Créer"
-3. Configurez les paramètres de base :
-   - Abonnement : Votre abonnement Azure
-   - Groupe de ressources : "vnet-RG" (même groupe que le premier réseau virtuel)
-   - Nom : "BahaSamia-vNet2"
-   - Région : France Central (une région différente du premier réseau virtuel)
+3. Configurez les paramètres de base:
+   - **Abonnement**: Votre abonnement Azure
+   - **Groupe de ressources**: "vnet-RG" (même groupe que le premier réseau virtuel)
+   - **Nom**: "BahaSamia-vNet2"
+   - **Région**: France Central (une région différente du premier réseau virtuel)
 4. Allez à l'onglet "Adresses IP"
-5. Supprimez l'espace d'adressage par défaut et ajoutez "172.16.0.0/16"
-6. Créez un sous-réseau nommé "Personnel" avec l'adresse "172.16.1.0/24"
+5. Supprimez l'espace d'adressage par défaut et ajoutez `172.16.0.0/16`
+6. Créez un sous-réseau nommé "Personnel" avec l'adresse `172.16.1.0/24`
 7. Cliquez sur "Vérifier + créer" puis sur "Créer"
 
-### b8.png - Création de VM3 dans le sous-réseau Personnel
+### 💻 b8.png - Création de VM3 dans le sous-réseau Personnel
 
-Pour reproduire cette capture d'écran :
 1. Dans le portail Azure, accédez à "Machines virtuelles"
 2. Cliquez sur "Créer" puis sélectionnez "Machine virtuelle"
-3. Configurez les paramètres de base :
-   - Abonnement : Votre abonnement Azure
-   - Groupe de ressources : "vnet-RG"
-   - Nom de la machine virtuelle : "VM3"
-   - Région : France Central (même région que BahaSamia-vNet2)
-   - Image : Ubuntu Server 20.04 LTS
-   - Taille : Standard B1s
+3. Configurez les paramètres de base:
+   - **Abonnement**: Votre abonnement Azure
+   - **Groupe de ressources**: "vnet-RG"
+   - **Nom de la machine virtuelle**: "VM3"
+   - **Région**: France Central (même région que BahaSamia-vNet2)
+   - **Image**: Ubuntu Server 20.04 LTS
+   - **Taille**: Standard B1s
 4. Configurez l'authentification avec un nom d'utilisateur et une clé SSH ou un mot de passe
 5. Allez à l'onglet "Mise en réseau"
 6. Pour "Réseau virtuel", sélectionnez "BahaSamia-vNet2"
@@ -435,103 +473,100 @@ Pour reproduire cette capture d'écran :
 8. Pour les paramètres de sécurité, autorisez le port SSH (22)
 9. Cliquez sur "Vérifier + créer" puis sur "Créer"
 
-### b9.png - Échec du test de ping entre VM1 et VM3 avant le peering
+### ❌ b9.png - Échec du test de ping entre VM1 et VM3 avant le peering
 
-Pour reproduire cette capture d'écran :
 1. Connectez-vous à VM1 via SSH
-2. Essayez de faire un ping vers l'adresse IP privée de VM3 :
+2. Essayez de faire un ping vers l'adresse IP privée de VM3:
    ```bash
    ping 172.16.1.4
    ```
 3. Vous devriez voir que le ping échoue, car par défaut, les réseaux virtuels dans Azure sont isolés les uns des autres
 4. Prenez une capture d'écran du résultat du ping (qui devrait montrer des timeouts)
 
-### b10.png - Configuration du peering entre les deux réseaux virtuels
+### 🔄 b10.png - Configuration du peering entre les deux réseaux virtuels
 
-Pour reproduire cette capture d'écran :
 1. Dans le portail Azure, accédez au réseau virtuel "BahaSamia-vNet1"
 2. Dans le menu de gauche, cliquez sur "Peerings"
 3. Cliquez sur "Ajouter" pour créer un nouveau peering
-4. Configurez les paramètres du peering :
-   - Nom du peering de ce réseau virtuel vers le réseau virtuel distant : "vNet1-to-vNet2"
-   - Réseau virtuel distant : Sélectionnez "BahaSamia-vNet2"
-   - Nom du peering du réseau virtuel distant vers ce réseau virtuel : "vNet2-to-vNet1"
+4. Configurez les paramètres du peering:
+   - **Nom du peering de ce réseau virtuel vers le réseau virtuel distant**: "vNet1-to-vNet2"
+   - **Réseau virtuel distant**: Sélectionnez "BahaSamia-vNet2"
+   - **Nom du peering du réseau virtuel distant vers ce réseau virtuel**: "vNet2-to-vNet1"
 5. Laissez les autres paramètres par défaut
 6. Cliquez sur "Ajouter"
 7. Prenez une capture d'écran de la configuration du peering
 
-### b11.png - Test de ping réussi entre VM1 et VM3 après la configuration du peering
+### ✅ b11.png - Test de ping réussi entre VM1 et VM3 après la configuration du peering
 
-Pour reproduire cette capture d'écran :
 1. Connectez-vous à VM1 via SSH
-2. Essayez à nouveau de faire un ping vers l'adresse IP privée de VM3 :
+2. Essayez à nouveau de faire un ping vers l'adresse IP privée de VM3:
    ```bash
    ping 172.16.1.4
    ```
 3. Cette fois, le ping devrait réussir, confirmant que le peering permet la communication entre les réseaux virtuels
 4. Prenez une capture d'écran du résultat du ping réussi
 
-### b12.png - Diagramme du réseau pour l'exercice 2
+### 📊 b12.png - Diagramme du réseau pour l'exercice 2
 
-Pour reproduire cette capture d'écran :
 1. Créez un diagramme conceptuel représentant la configuration du réseau après la mise en place du peering
-2. Représentez les éléments suivants dans votre diagramme :
+2. Représentez les éléments suivants dans votre diagramme:
    - Les deux réseaux virtuels BahaSamia-vNet1 (192.168.0.0/16) et BahaSamia-vNet2 (172.16.0.0/16)
-   - Tous les sous-réseaux : Direction, RH et Personnel
+   - Tous les sous-réseaux: Direction, RH et Personnel
    - Les trois machines virtuelles VM1, VM2 et VM3 avec leurs adresses IP privées
    - Le groupe de sécurité réseau BahaSamia-NSG1
    - La connexion de peering entre les deux réseaux virtuels
    - Des flèches indiquant la communication entre VM1 et VM3
 
-### b13.png - Création du réseau virtuel pour l'exercice 3
+---
 
-Pour reproduire cette capture d'écran :
+## Configuration d'une connexion VPN point-à-site
+
+### 📌 b13.png - Création du réseau virtuel pour l'exercice 3
+
 1. Supprimez d'abord toutes les ressources des exercices précédents
 2. Dans le portail Azure, accédez à "Réseaux virtuels"
 3. Cliquez sur "Créer"
-4. Configurez les paramètres de base :
-   - Abonnement : Votre abonnement Azure
-   - Groupe de ressources : "vnet-RG"
-   - Nom : "BahaSamia-vNet1"
-   - Région : France Central
+4. Configurez les paramètres de base:
+   - **Abonnement**: Votre abonnement Azure
+   - **Groupe de ressources**: "vnet-RG"
+   - **Nom**: "BahaSamia-vNet1"
+   - **Région**: France Central
 5. Allez à l'onglet "Adresses IP"
-6. Supprimez l'espace d'adressage par défaut et ajoutez "172.16.0.0/16"
-7. Créez un sous-réseau nommé "Personnel" avec l'adresse "172.16.1.0/24"
+6. Supprimez l'espace d'adressage par défaut et ajoutez `172.16.0.0/16`
+7. Créez un sous-réseau nommé "Personnel" avec l'adresse `172.16.1.0/24`
 8. Cliquez sur "Vérifier + créer" puis sur "Créer"
 
-### b14.png - Création de la passerelle de réseau virtuel
+### 🔐 b14.png - Création de la passerelle de réseau virtuel
 
-Pour reproduire cette capture d'écran :
 1. Dans le portail Azure, recherchez "Passerelles de réseau virtuel" et cliquez dessus
 2. Cliquez sur "Créer"
-3. Configurez les paramètres de base :
-   - Abonnement : Votre abonnement Azure
-   - Groupe de ressources : "vnet-RG"
-   - Nom : "BahaSamia-VPN-gateway1"
-   - Région : France Central (même région que le réseau virtuel)
-   - Type de passerelle : VPN
-   - Type de VPN : Basé sur des itinéraires
-   - SKU : De base
-   - Génération : Generation1
-   - Réseau virtuel : "BahaSamia-vNet1"
-4. Un sous-réseau de passerelle sera automatiquement créé avec l'adresse "172.16.2.0/24"
+3. Configurez les paramètres de base:
+   - **Abonnement**: Votre abonnement Azure
+   - **Groupe de ressources**: "vnet-RG"
+   - **Nom**: "BahaSamia-VPN-gateway1"
+   - **Région**: France Central (même région que le réseau virtuel)
+   - **Type de passerelle**: VPN
+   - **Type de VPN**: Basé sur des itinéraires
+   - **SKU**: De base
+   - **Génération**: Generation1
+   - **Réseau virtuel**: "BahaSamia-vNet1"
+4. Un sous-réseau de passerelle sera automatiquement créé avec l'adresse `172.16.2.0/24`
 5. Configurez une nouvelle adresse IP publique nommée "VPN-ip1"
 6. Cliquez sur "Vérifier + créer" puis sur "Créer"
-7. Prenez note que le déploiement peut prendre jusqu'à 45 minutes
+7. ⏱️ *Notez que le déploiement peut prendre jusqu'à 45 minutes*
 
-### b15.png - Exportation des certificats pour la connexion VPN
+### 🔑 b15.png - Exportation des certificats pour la connexion VPN
 
-Pour reproduire cette capture d'écran :
 1. Sur votre machine Windows locale, ouvrez PowerShell en tant qu'administrateur
-2. Générez un certificat racine auto-signé avec PowerShell :
+2. Générez un certificat racine auto-signé avec PowerShell:
    ```powershell
    $cert = New-SelfSignedCertificate -Type Custom -KeySpec Signature -Subject "CN=P2SRootCert" -KeyExportPolicy Exportable -HashAlgorithm sha256 -KeyLength 2048 -CertStoreLocation "Cert:\CurrentUser\My" -KeyUsageProperty Sign -KeyUsage CertSign
    ```
-3. Générez un certificat client avec PowerShell :
+3. Générez un certificat client avec PowerShell:
    ```powershell
    New-SelfSignedCertificate -Type Custom -DnsName P2SChildCert -KeySpec Signature -Subject "CN=P2SChildCert" -KeyExportPolicy Exportable -HashAlgorithm sha256 -KeyLength 2048 -CertStoreLocation "Cert:\CurrentUser\My" -Signer $cert -TextExtension @("2.5.29.37={text}1.3.6.1.5.5.7.3.2")
    ```
-4. Exportez le certificat racine au format .cer (sans la clé privée) :
+4. Exportez le certificat racine au format .cer (sans la clé privée):
    - Ouvrez le gestionnaire de certificats (certmgr.msc)
    - Naviguez jusqu'à Personnel > Certificats
    - Cliquez avec le bouton droit sur le certificat "P2SRootCert"
@@ -539,7 +574,7 @@ Pour reproduire cette capture d'écran :
    - Suivez l'assistant et sélectionnez "Non, ne pas exporter la clé privée"
    - Sélectionnez le format X.509 encodé en base 64 (.CER)
    - Enregistrez le fichier
-5. Exportez le certificat client au format .pfx (avec la clé privée) :
+5. Exportez le certificat client au format .pfx (avec la clé privée):
    - Cliquez avec le bouton droit sur le certificat "P2SChildCert"
    - Sélectionnez "Toutes les tâches" > "Exporter"
    - Suivez l'assistant et sélectionnez "Oui, exporter la clé privée"
@@ -548,15 +583,14 @@ Pour reproduire cette capture d'écran :
    - Enregistrez le fichier
 6. Prenez une capture d'écran du processus d'exportation
 
-### b16.png - Configuration point-à-site de la passerelle VPN
+### 🌐 b16.png - Configuration point-à-site de la passerelle VPN
 
-Pour reproduire cette capture d'écran :
 1. Une fois la passerelle VPN déployée, accédez-y dans le portail Azure
 2. Dans le menu de gauche, cliquez sur "Configuration point-à-site"
-3. Configurez les paramètres suivants :
-   - Pool d'adresses : "192.168.1.0/24" (plage d'adresses pour les clients VPN)
-   - Type de tunnel : OpenVPN (SSL)
-   - Type d'authentification : Certificat Azure
+3. Configurez les paramètres suivants:
+   - **Pool d'adresses**: `192.168.1.0/24` (plage d'adresses pour les clients VPN)
+   - **Type de tunnel**: OpenVPN (SSL)
+   - **Type d'authentification**: Certificat Azure
 4. Sous "Certificats racine", cliquez sur "Ajouter un certificat"
 5. Donnez un nom au certificat (par exemple, "BahaSamia-Root")
 6. Ouvrez le fichier .cer exporté précédemment avec un éditeur de texte et copiez tout le contenu (y compris les lignes BEGIN CERTIFICATE et END CERTIFICATE)
@@ -564,32 +598,34 @@ Pour reproduire cette capture d'écran :
 8. Cliquez sur "Enregistrer"
 9. Prenez une capture d'écran de la configuration point-à-site
 
-### Test de la connexion VPN point-à-site
+### 🧪 Test de la connexion VPN point-à-site
 
-Pour tester la connexion VPN point-à-site :
 1. Dans la configuration point-à-site de la passerelle VPN, cliquez sur "Télécharger le client VPN"
 2. Sélectionnez le client approprié pour votre système d'exploitation
 3. Téléchargez et installez le client VPN sur votre machine locale
-4. Avant de démarrer la connexion VPN, notez votre adresse IP privée actuelle :
+4. Avant de démarrer la connexion VPN, notez votre adresse IP privée actuelle:
    ```
    ipconfig
    ```
 5. Importez le certificat client (.pfx) si nécessaire
 6. Lancez le client VPN et connectez-vous au réseau virtuel Azure
-7. Une fois connecté, vérifiez votre nouvelle adresse IP :
+7. Une fois connecté, vérifiez votre nouvelle adresse IP:
    ```
    ipconfig
    ```
 8. Créez une VM dans le sous-réseau "Personnel" du réseau virtuel si ce n'est pas déjà fait
-9. Testez la connectivité en faisant un ping vers l'adresse IP privée de cette VM :
+9. Testez la connectivité en faisant un ping vers l'adresse IP privée de cette VM:
    ```
    ping 172.16.1.4
    ```
 10. Le ping devrait réussir, confirmant que la connexion VPN fonctionne correctement
 
-### Nettoyage des ressources
+---
 
-Après avoir terminé tous les exercices, nettoyez les ressources pour éviter des frais inutiles :
+## 🧹 Nettoyage des ressources
+
+Après avoir terminé tous les exercices, nettoyez les ressources pour éviter des frais inutiles:
+
 1. Déconnectez le client VPN
 2. Dans le portail Azure, accédez à "Groupes de ressources"
 3. Sélectionnez le groupe de ressources "vnet-RG"
@@ -598,13 +634,16 @@ Après avoir terminé tous les exercices, nettoyez les ressources pour éviter d
 6. Cliquez sur "Supprimer"
 7. Attendez que toutes les ressources soient supprimées
 
-## Création et gestion du stockage Azure (c1.png à c7.png)
+## 🗄️ Création et gestion du stockage Azure
+*Captures d'écran référencées: c1.png à c7.png*
 
 Cette section couvre la création et la configuration des différents types de stockage Azure (Blob, File, Queue et Table) ainsi que l'exploration de leurs fonctionnalités spécifiques.
 
-### c1.png - Création d'un compte de stockage
+### 🔹 c1.png - Création d'un compte de stockage
 
-Pour reproduire cette capture d'écran :
+<details>
+<summary><b>Instructions détaillées</b></summary>
+
 1. Connectez-vous au [portail Azure](https://portal.azure.com)
 2. Cliquez sur "Créer une ressource" dans le menu de gauche
 3. Recherchez "Compte de stockage" et sélectionnez-le
@@ -620,11 +659,14 @@ Pour reproduire cette capture d'écran :
    - Niveau d'accès au stockage blob par défaut : Chaud (Hot)
 6. Cliquez sur "Vérifier + créer" puis sur "Créer"
 
-> **Note**: Si vous essayez d'utiliser un nom simple comme "TEST", vous recevrez une erreur car le nom du compte de stockage doit être unique au niveau mondial dans Azure.
+> **⚠️ Note**: Si vous essayez d'utiliser un nom simple comme "TEST", vous recevrez une erreur car le nom du compte de stockage doit être unique au niveau mondial dans Azure.
+</details>
 
-### c2.png - Configuration du container Blob et upload des fichiers
+### 🔹 c2.png - Configuration du container Blob et upload des fichiers
 
-Pour reproduire cette capture d'écran :
+<details>
+<summary><b>Instructions détaillées</b></summary>
+
 1. Une fois le compte de stockage créé, accédez-y dans le portail Azure
 2. Dans le menu de gauche, sélectionnez "Containers" (sous la section "Stockage de données")
 3. Cliquez sur "+ Container" et configurez :
@@ -634,10 +676,13 @@ Pour reproduire cette capture d'écran :
 5. Cliquez sur "Télécharger" pour ajouter des fichiers PDF
 6. Téléchargez 3 fichiers PDF (les 3 premiers chapitres Azure)
 7. Une fois téléchargés, vous pouvez voir la liste des fichiers dans le container
+</details>
 
-### c3.png - Container avec niveau d'accès Container et modification de fichier texte
+### 🔹 c3.png - Container avec niveau d'accès Container et modification de fichier texte
 
-Pour reproduire cette capture d'écran :
+<details>
+<summary><b>Instructions détaillées</b></summary>
+
 1. Dans votre compte de stockage, accédez à "Containers"
 2. Cliquez sur "+ Container" et configurez :
    - Nom : "text-files"
@@ -649,11 +694,14 @@ Pour reproduire cette capture d'écran :
 7. Modifiez le contenu du fichier texte
 8. Cliquez sur "Enregistrer" pour sauvegarder les modifications
 
-> **Note**: Avec le niveau d'accès "Container", vous pouvez accéder directement au fichier via son URL publique: `https://[nom-de-votre-compte].blob.core.windows.net/text-files/notes.txt`
+> **💡 Astuce**: Avec le niveau d'accès "Container", vous pouvez accéder directement au fichier via son URL publique: `https://[nom-de-votre-compte].blob.core.windows.net/text-files/notes.txt`
+</details>
 
-### c4.png - Création et connexion du File Share
+### 🔹 c4.png - Création et connexion du File Share
 
-Pour reproduire cette capture d'écran :
+<details>
+<summary><b>Instructions détaillées</b></summary>
+
 1. Dans votre compte de stockage, accédez à "Partages de fichiers" dans le menu de gauche
 2. Cliquez sur "+ Partage de fichiers" et configurez :
    - Nom : "fileshare1"
@@ -667,10 +715,13 @@ Pour reproduire cette capture d'écran :
 8. Accédez au lecteur nouvellement monté sur votre système
 9. Copiez les 3 premiers chapitres Azure dans ce lecteur
 10. Retournez au portail Azure et cliquez sur "Actualiser" pour voir les fichiers ajoutés
+</details>
 
-### c5.png - Création et gestion de Table Storage
+### 🔹 c5.png - Création et gestion de Table Storage
 
-Pour reproduire cette capture d'écran :
+<details>
+<summary><b>Instructions détaillées</b></summary>
+
 1. Dans votre compte de stockage, accédez à "Tables" dans le menu de gauche
 2. Cliquez sur "+ Table" et nommez-la "table1"
 3. Une fois la table créée, accédez à "Explorateur de stockage" dans le menu de gauche
@@ -690,10 +741,13 @@ Pour reproduire cette capture d'écran :
 6. Pour effectuer une requête, cliquez sur "Requête"
 7. Dans le champ "Filtre", entrez: `age eq 24 or PartitionKey eq 'Ahmed'`
 8. Cliquez sur "Exécuter la requête" pour voir les résultats filtrés
+</details>
 
-### c6.png - Création et ajout de messages dans Queue Storage
+### 🔹 c6.png - Création et ajout de messages dans Queue Storage
 
-Pour reproduire cette capture d'écran :
+<details>
+<summary><b>Instructions détaillées</b></summary>
+
 1. Dans votre compte de stockage, accédez à "Files d'attente" dans le menu de gauche
 2. Cliquez sur "+ File d'attente" et nommez-la "Queue1"
 3. Une fois la file d'attente créée, cliquez dessus
@@ -701,10 +755,13 @@ Pour reproduire cette capture d'écran :
 5. Entrez le texte de votre premier message et cliquez sur "OK"
 6. Répétez l'opération pour ajouter un deuxième message
 7. Vous verrez maintenant les deux messages dans votre file d'attente
+</details>
 
-### c7.png - Vue d'ensemble du compte de stockage avec Storage Explorer
+### 🔹 c7.png - Vue d'ensemble du compte de stockage avec Storage Explorer
 
-Pour reproduire cette capture d'écran :
+<details>
+<summary><b>Instructions détaillées</b></summary>
+
 1. Dans votre compte de stockage, accédez à "Explorateur de stockage" dans le menu de gauche
 2. Vous verrez une vue d'ensemble de tous les types de stockage que vous avez configurés :
    - BLOB CONTAINERS : "cours" et "text-files"
@@ -712,15 +769,23 @@ Pour reproduire cette capture d'écran :
    - QUEUES : "Queue1"
    - TABLES : "table1"
 3. Explorez chaque type de stockage pour vérifier que toutes vos données sont présentes
+</details>
 
-### Exploration du stockage haute disponibilité
+### 🔄 Exploration du stockage haute disponibilité
+
+<details>
+<summary><b>Options de haute disponibilité</b></summary>
 
 Pour explorer les options de haute disponibilité du stockage :
 1. Notez que pour créer un blob storage hautement disponible, vous devriez choisir ZRS (Zone-Redundant Storage) ou GZRS (Geo-Zone-Redundant Storage) comme type de redondance
 2. Sachez que le type de redondance est défini lors de la création du compte de stockage et ne peut pas être modifié facilement par la suite pour certaines transitions
 3. Pour modifier le type de redondance, vous devriez créer un nouveau compte de stockage avec le type de redondance souhaité
+</details>
 
-### Libération des ressources
+### 🧹 Libération des ressources
+
+<details>
+<summary><b>Instructions de nettoyage</b></summary>
 
 Pour supprimer toutes les ressources de stockage créées :
 1. Dans le portail Azure, accédez à "Groupes de ressources"
@@ -728,14 +793,20 @@ Pour supprimer toutes les ressources de stockage créées :
 3. Cliquez sur "Supprimer le groupe de ressources" dans le menu supérieur
 4. Confirmez la suppression en saisissant le nom du groupe de ressources
 5. Cliquez sur "Supprimer"
+</details>
 
-## Azure App Service (d1 à d11)
+---
 
-Cette section détaille les étapes pour reproduire les captures d'écran liées à Azure App Service (d1.png à d11.png).
+## 🌐 Azure App Service
+*Captures d'écran référencées: d1.png à d11.png*
 
-### d1.png - Création de la première application web avec le plan B1
+Cette section détaille les étapes pour reproduire les captures d'écran liées à Azure App Service.
 
-Pour reproduire cette capture d'écran :
+### 🔹 d1.png - Création de la première application web avec le plan B1
+
+<details>
+<summary><b>Instructions détaillées</b></summary>
+
 1. Connectez-vous au [portail Azure](https://portal.azure.com)
 2. Cliquez sur "Créer une ressource" dans le menu de gauche
 3. Recherchez "Web App" et sélectionnez-la
@@ -753,10 +824,13 @@ Pour reproduire cette capture d'écran :
    - Sélectionnez le niveau tarifaire "B1"
 7. Cliquez sur "Vérifier + créer"
 8. Une fois la validation passée, cliquez sur "Créer"
+</details>
 
-### d2.png - Création de la deuxième application web avec le même plan B1
+### 🔹 d2.png - Création de la deuxième application web avec le même plan B1
 
-Pour reproduire cette capture d'écran :
+<details>
+<summary><b>Instructions détaillées</b></summary>
+
 1. Dans le portail Azure, cliquez sur "Créer une ressource"
 2. Recherchez "Web App" et sélectionnez-la
 3. Cliquez sur "Créer"
@@ -772,8 +846,12 @@ Pour reproduire cette capture d'écran :
    - Choisissez "plan-B1" dans la liste déroulante
 6. Cliquez sur "Vérifier + créer"
 7. Une fois la validation passée, cliquez sur "Créer"
+</details>
 
-### d3.png - Tentative de création d'une application web avec des paramètres incompatibles
+### 🔹 d3.png - Tentative de création d'une application web avec des paramètres incompatibles
+
+<details>
+<summary><b>Instructions détaillées et résolution</b></summary>
 
 Pour reproduire cette capture d'écran montrant l'incompatibilité :
 1. Dans le portail Azure, cliquez sur "Créer une ressource"
@@ -793,10 +871,13 @@ Pour résoudre ce problème :
 1. Revenez à la région "East US"
 2. Revenez au système d'exploitation "Linux"
 3. Vous pourrez alors sélectionner le plan "plan-B1" existant
+</details>
 
-### d4.png - Scale-out manuel du plan B1 de 1 à 2 instances
+### 🔹 d4.png - Scale-out manuel du plan B1 de 1 à 2 instances
 
-Pour reproduire cette capture d'écran :
+<details>
+<summary><b>Instructions détaillées</b></summary>
+
 1. Dans le portail Azure, accédez au groupe de ressources "webApp-RG"
 2. Sélectionnez le plan App Service "plan-B1"
 3. Dans le menu de gauche, cliquez sur "Mise à l'échelle"
@@ -805,11 +886,14 @@ Pour reproduire cette capture d'écran :
 6. Changez le nombre d'instances de 1 à 2
 7. Cliquez sur "Enregistrer"
 
-> **Note** : Le plan B1 permet un maximum de 3 instances en scale-out manuel. Pour plus d'instances, un plan supérieur est nécessaire.
+> **📊 Limitation**: Le plan B1 permet un maximum de 3 instances en scale-out manuel. Pour plus d'instances, un plan supérieur est nécessaire.
+</details>
 
-### d5.png - Scale-up du plan B1 vers le plan Standard S1
+### 🔹 d5.png - Scale-up du plan B1 vers le plan Standard S1
 
-Pour reproduire cette capture d'écran :
+<details>
+<summary><b>Instructions détaillées</b></summary>
+
 1. Dans le portail Azure, accédez au groupe de ressources "webApp-RG"
 2. Sélectionnez le plan App Service "plan-B1"
 3. Dans le menu de gauche, cliquez sur "Mise à l'échelle"
@@ -818,11 +902,14 @@ Pour reproduire cette capture d'écran :
 6. Choisissez le niveau "S1"
 7. Cliquez sur "Appliquer"
 
-> **Note** : Le passage au plan Standard S1 permet d'accéder à des fonctionnalités supplémentaires comme le scale-out automatique, la redondance interzone et jusqu'à 10 instances.
+> **🚀 Avantage**: Le passage au plan Standard S1 permet d'accéder à des fonctionnalités supplémentaires comme le scale-out automatique, la redondance interzone et jusqu'à 10 instances.
+</details>
 
-### d6.png - Configuration des métriques de surveillance pour le plan App Service
+### 🔹 d6.png - Configuration des métriques de surveillance pour le plan App Service
 
-Pour reproduire cette capture d'écran :
+<details>
+<summary><b>Instructions détaillées</b></summary>
+
 1. Dans le portail Azure, accédez au groupe de ressources "webApp-RG"
 2. Sélectionnez le plan App Service (maintenant au niveau S1)
 3. Dans le menu de gauche, cliquez sur "Métriques"
@@ -837,10 +924,13 @@ Pour reproduire cette capture d'écran :
    - Dans "Agrégation", choisissez "Moyenne"
    - Dans "Type de graphique", sélectionnez "Graphique en aire"
 6. Ajustez la période à surveiller selon vos besoins (ex: dernière heure)
+</details>
 
-### d7.png - Configuration du scale-out automatique basé sur des règles
+### 🔹 d7.png - Configuration du scale-out automatique basé sur des règles
 
-Pour reproduire cette capture d'écran :
+<details>
+<summary><b>Instructions détaillées</b></summary>
+
 1. Dans le portail Azure, accédez au groupe de ressources "webApp-RG"
 2. Sélectionnez le plan App Service (au niveau S1)
 3. Dans le menu de gauche, cliquez sur "Mise à l'échelle"
@@ -850,7 +940,9 @@ Pour reproduire cette capture d'écran :
    - Instance minimale : 1
    - Instance maximale : 10
    - Instance par défaut : 2
-7. Cliquez sur "Ajouter une règle" pour la règle de scale-out :
+
+7. **Règle de Scale-Out**:
+   - Cliquez sur "Ajouter une règle"
    - Nom de la règle : "ScaleOutRule"
    - Métrique source : "Pourcentage CPU"
    - Opérateur : "Supérieur à"
@@ -859,8 +951,10 @@ Pour reproduire cette capture d'écran :
    - Action : "Augmenter le nombre de"
    - Valeur : 1
    - Temps de refroidissement (minutes) : 5
-8. Cliquez sur "Ajouter" pour valider cette règle
-9. Cliquez sur "Ajouter une règle" pour la règle de scale-in :
+   - Cliquez sur "Ajouter"
+
+8. **Règle de Scale-In**:
+   - Cliquez sur "Ajouter une règle"
    - Nom de la règle : "ScaleInRule"
    - Métrique source : "Pourcentage CPU"
    - Opérateur : "Inférieur à"
@@ -869,12 +963,16 @@ Pour reproduire cette capture d'écran :
    - Action : "Diminuer le nombre de"
    - Valeur : 1
    - Temps de refroidissement (minutes) : 5
-10. Cliquez sur "Ajouter" pour valider cette règle
-11. Cliquez sur "Enregistrer"
+   - Cliquez sur "Ajouter"
 
-### d8.png - Déploiement de l'application Java depuis Intellij vers Azure App Service
+9. Cliquez sur "Enregistrer"
+</details>
 
-Pour reproduire cette capture d'écran :
+### 🔹 d8.png - Déploiement de l'application Java depuis Intellij vers Azure App Service
+
+<details>
+<summary><b>Instructions détaillées</b></summary>
+
 1. Ouvrez Intellij IDEA
 2. Installez l'extension Azure pour Intellij via File > Settings > Plugins (ou IntelliJ IDEA > Preferences > Plugins sur Mac)
 3. Recherchez "Azure Toolkit for Intellij" et installez-le
@@ -890,10 +988,13 @@ Pour reproduire cette capture d'écran :
 10. Cliquez sur "Deploy"
 11. Attendez que le déploiement se termine
 12. Vérifiez l'application à l'URL : https://boualikarim.azurewebsites.net
+</details>
 
-### d9.png - Création et configuration d'un emplacement de déploiement pour les tests
+### 🔹 d9.png - Création et configuration d'un emplacement de déploiement pour les tests
 
-Pour reproduire cette capture d'écran :
+<details>
+<summary><b>Instructions détaillées</b></summary>
+
 1. Dans le portail Azure, accédez à votre application web "BoualiKarim"
 2. Dans le menu de gauche, cliquez sur "Emplacements de déploiement"
 3. Cliquez sur "Ajouter un emplacement"
@@ -904,11 +1005,14 @@ Pour reproduire cette capture d'écran :
 6. Une fois l'emplacement créé, il apparaîtra dans la liste des emplacements
 7. Pour déployer du code vers cet emplacement, suivez les mêmes étapes qu'à l'étape d8, mais sélectionnez l'emplacement "test" comme cible
 
-> **Note** : L'URL de votre emplacement de test sera : https://boualikarim-test.azurewebsites.net
+> **🔗 URL**: L'URL de votre emplacement de test sera : https://boualikarim-test.azurewebsites.net
+</details>
 
-### d10.png - Échange entre l'emplacement de test et l'emplacement de production
+### 🔹 d10.png - Échange entre l'emplacement de test et l'emplacement de production
 
-Pour reproduire cette capture d'écran :
+<details>
+<summary><b>Instructions détaillées</b></summary>
+
 1. Dans le portail Azure, accédez à votre application web "BoualiKarim"
 2. Dans le menu de gauche, cliquez sur "Emplacements de déploiement"
 3. En haut de la page, cliquez sur "Échanger"
@@ -919,10 +1023,13 @@ Pour reproduire cette capture d'écran :
 6. Cliquez sur "Échanger"
 7. Attendez que l'opération d'échange se termine
 8. Vérifiez que votre site de production a bien été mis à jour avec la version de l'emplacement de test
+</details>
 
-### d11.png - Configuration d'un nom de domaine personnalisé pour l'application web
+### 🔹 d11.png - Configuration d'un nom de domaine personnalisé pour l'application web
 
-Pour reproduire cette capture d'écran :
+<details>
+<summary><b>Instructions détaillées</b></summary>
+
 1. Dans le portail Azure, accédez à votre application web "BoualiKarim"
 2. Dans le menu de gauche, cliquez sur "Noms de domaine personnalisés"
 3. Vous avez deux options :
@@ -942,30 +1049,35 @@ Pour reproduire cette capture d'écran :
    - Cliquez sur "Valider" pour vérifier que les enregistrements DNS sont correctement configurés
    - Une fois validé, cliquez sur "Ajouter un nom d'hôte personnalisé"
 
-> **Note** : Pour utiliser des domaines personnalisés, vous devez avoir au minimum un plan App Service de niveau Basic (B1) ou supérieur.
+> **⚠️ Prérequis**: Pour utiliser des domaines personnalisés, vous devez avoir au minimum un plan App Service de niveau Basic (B1) ou supérieur.
+</details>
 
-## Résumé des bonnes pratiques pour Azure App Service
+---
 
-1. **Planification du bon niveau tarifaire** :
-   - Niveau Free ou Shared : pour tests et développement
-   - Niveau Basic (B1) : pour les applications de production à faible trafic
-   - Niveau Standard (S1+) : pour applications de production nécessitant scale-out et haute disponibilité
-   - Niveau Premium : pour performances et fonctionnalités avancées
+## 📋 Résumé des bonnes pratiques pour Azure App Service
 
-2. **Optimisation des coûts** :
-   - Héberger plusieurs applications sur un même plan App Service si elles ont des besoins similaires
-   - Configurer le scale-in automatique pour réduire les instances pendant les périodes de faible trafic
+### 🏷️ Planification du bon niveau tarifaire
+| Niveau | Utilisation recommandée |
+|--------|-------------------------|
+| Free/Shared | Tests et développement |
+| Basic (B1) | Production à faible trafic |
+| Standard (S1+) | Production avec scale-out et haute disponibilité |
+| Premium | Performances et fonctionnalités avancées |
 
-3. **Déploiement sécurisé** :
-   - Utiliser les emplacements de déploiement pour tester avant de passer en production
-   - Pratiquer l'échange (swap) d'emplacements pour minimiser les temps d'arrêt
+### 💰 Optimisation des coûts
+- Héberger plusieurs applications sur un même plan App Service si elles ont des besoins similaires
+- Configurer le scale-in automatique pour réduire les instances pendant les périodes de faible trafic
 
-4. **Surveillance** :
-   - Configurer des métriques pour surveiller régulièrement les performances
-   - Configurer des alertes pour être notifié en cas de problèmes
-   - Ajuster les règles de mise à l'échelle automatique en fonction des données de surveillance
+### 🔒 Déploiement sécurisé
+- Utiliser les emplacements de déploiement pour tester avant de passer en production
+- Pratiquer l'échange (swap) d'emplacements pour minimiser les temps d'arrêt
 
-5. **Sécurité** :
-   - Configurer HTTPS et les certificats SSL pour sécuriser le trafic
-   - Utiliser les restrictions d'accès IP si nécessaire
-   - Activer l'authentification et l'autorisation appropriée
+### 📊 Surveillance
+- Configurer des métriques pour surveiller régulièrement les performances
+- Configurer des alertes pour être notifié en cas de problèmes
+- Ajuster les règles de mise à l'échelle automatique en fonction des données de surveillance
+
+### 🛡️ Sécurité
+- Configurer HTTPS et les certificats SSL pour sécuriser le trafic
+- Utiliser les restrictions d'accès IP si nécessaire
+- Activer l'authentification et l'autorisation appropriée
