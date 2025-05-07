@@ -1,5 +1,5 @@
 <a href="https://freeimage.host/i/3OzGUps">
-  <img src="https://iili.io/3OzGUps.md.png" alt="icon" width="20" style="vertical-align:middle; border:0;">
+  <img src="https://iili.io/3OzGUps.md.png" alt="icon" width="60" style="vertical-align:middle; border:0;">
 </a>
 
 ## Projet Azure – Simulation Cloud
